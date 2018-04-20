@@ -1,0 +1,647 @@
+/**
+FONT
+	font-family: 'Raleway', sans-serif;    from Google Fonts
+	font-family: 'Century Gothic', Arial;
+**/
+
+
+
+body
+{
+	padding-top:7rem;
+}
+.choicehead
+{
+	font-family: 'Century Gothic', 'Arial';
+	font-size: 3.5rem;
+	font-weight: bold;
+	text-align: center;
+}
+.divChoice
+{
+	color:black;
+	border-color: #0d7703;
+	border-radius: 10px;
+	border-style:solid;
+	border-width:2px;
+	font-family: 'Raleway', sans-serif;
+	font-size: 2rem;
+	margin-bottom: 2rem;
+	min-height: 5rem;
+	padding-top: 2rem;
+	text-align: center;
+	text-decoration: none;
+}
+.divChoice:hover
+{
+	color:black;
+	border-color: #0d7703;
+	border-radius: 10px;
+	border-style:solid;
+	border-width:3px;
+	box-shadow: 10px 10px 20px grey;
+	font-family: 'Raleway', sans-serif;
+	font-size:2rem;
+	font-weight:bold;
+	margin-bottom: 2rem;
+	min-height: 5rem;
+	padding-top: 2rem;
+	text-align: center;
+	text-decoration: none;
+}
+.moduleHead
+{
+	font-family: 'Century Gothic', 'Arial';
+	font-size: 2.5rem;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 2%;
+}
+.moduleSubHead
+{
+	font-family: 'Raleway', sans-serif;
+	font-size: 1rem;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 2%;
+}
+.title-detail {
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    background-color: transparent !important;
+	color:#0d7703 !important;
+	border-color: #0d7703 !important;
+}
+.btn.disabled, .btn:disabled {
+    opacity: 0.5;
+}
+.btn-primary
+{
+	background-color: transparent;
+	color:#0d7703;
+	border-color: #0d7703;
+	border-radius: 10px;
+	border-style:solid;
+	border-width:2px;
+	font-family: 'Century Gothic', Arial;
+	font-size: 1.3rem;
+	font-weight:bold;
+	margin-bottom: 2rem;
+	padding: 0.5em;
+	text-align: center;
+	text-decoration: none;
+	width: 50%;
+}
+.btn-primary:hover
+{
+	color:white;
+	background-color:#0d7703; 
+	border-color: #0d7703;
+	border-radius: 10px;
+	border-style:solid;
+	border-width:2px;
+	font-family: 'Century Gothic', Arial;
+	font-size:1.3rem;
+	font-weight:bold;
+	margin-bottom: 2rem;
+	text-align: center;
+	text-decoration: none;
+}
+
+#register-form {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+.label-verify {
+	font-family: 'Raleway', sans-serif;
+	text-align: center;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+
+/************************************
+navbar customization
+************************************/
+.bg-primary
+{
+  /**background: linear-gradient(rgb(13, 119, 3, 0.9), rgba(30, 156, 18, 0.8)) !important;**/
+  background-color: rgb(30, 156, 18) !important;
+}
+
+.navbar-dark .navbar-brand
+{
+	font-family: 'Century Gothic';
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.navbar-dark .navbar-nav .nav-link
+{
+	font-family: 'Century Gothic';
+}
+
+
+
+/***********************************************
+				HOME PAGE
+***********************************************/
+.home-bg {
+	background: linear-gradient(rgba(255, 255, 255,0.8), rgba(255, 255, 255, 0.8)),
+                url('../images/sample.jpg') no-repeat fixed;
+	background-size: cover;
+}
+.homepage-title {
+	font-size: 3.5em;
+}
+.homepage-subtitle {
+	font-size: 1.2rem;
+	margin-bottom: 4rem;
+}
+.login-container {
+	border-style: solid;
+	border-radius: 10px;
+	border-color: gray;
+	border-width: 1px;
+	padding: 15px 20px;
+}
+.login-title .homepage-title {
+	font-family: 'Raleway', sans-serif;
+}
+.login-title {
+	text-align: center;
+}
+.btnRegister {
+	background-color: #0d7703;
+	color:white;
+	border-color: #36af2b;
+	border-radius: 10px;
+	border-style:solid;
+	border-width:2px;
+	font-family: 'Century Gothic', Arial;
+	font-size: 1.3rem;
+	font-weight:bold;
+	margin-bottom: 2rem;
+	padding: 0.5em;
+	text-align: center;
+	text-decoration: none;
+	width: 50%;
+}
+.btnRegister:hover {
+	background-color: #36af2b;
+	color:white;
+	border-color: white;
+	border-radius: 10px;
+	border-style:solid;
+	border-width:2px;
+	font-family: 'Century Gothic', Arial;
+	font-size: 1.3rem;
+	font-weight:bold;
+	margin-bottom: 2rem;
+	padding: 0.5em;
+	text-align: center;
+	text-decoration: none;
+	width: 50%;
+}
+.space{
+	margin-bottom: 20px;
+}
+.footer {
+	/**margin-left: 20px;**/
+	bottom: 0;
+	margin-top: 5%;
+}
+.tualogo {
+	margin-right: 10px;
+}
+.ceislogo {
+	margin-left: 10px;
+}
+/************** END OF HOME PAGE ************/
+
+
+/***********************************************
+				REGISTER AS (CUSTOM)
+***********************************************/
+.register-as-bg {
+	background: linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255, 0.4)),
+				url('../../resources/images/registerbg.jpg') no-repeat;
+	z-index: 1;
+	background-size: cover;
+}
+img.progressImageRight {
+    height: 5%;
+    width: 5%;
+    display:none
+}
+    
+i.textBoxMessageAvailableMd {
+    display:none; 
+    color:green; 
+    padding: .5em; 
+    font-size:.7em; 
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+i.textBoxMessageNotAvailableMd {
+    display:none; 
+    color:red; 
+    padding: .5em; 
+    font-size:.7em; 
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+div.jQueryFormValidationMessage {
+    color:red; 
+    padding: 1em; 
+    font-size:0.9rem; 
+    font-family: Arial, Helvetica, sans-serif;
+}
+.form-group {
+	margin: 0;
+	padding: 0;
+}
+.firstgrp {
+	width: 50%;
+}
+input{
+	text-align: center
+}
+.submitBtn {
+	width: 50%;
+	margin-top: 20px;
+}
+
+
+
+/************** END OF REGISTER PAGE ************/
+
+.form-complete{
+	width: 100%;
+}
+
+.input-group > .form-control:not(:last-child), .input-group > .custom-select:not(:last-child) {
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+}
+
+.backupErrorMsg
+{
+	background-color: rgba(255,0,0,0.3);
+	border-radius: 20px;
+	font-family: 'Century Gothic', Arial;
+	font-size: 1rem;
+	margin-bottom: 1.5rem;
+	padding: 1rem;
+	text-align: center;
+}
+
+.backupErrorMsg2
+{
+	background-color: rgba(255,0,0,0.3);
+	border-radius: 20px;
+	font-family: 'Century Gothic', Arial;
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+	padding: 1rem;
+	text-align: center;
+}
+
+.SuccessMsg
+{
+	background-color: rgba(0,255,0,0.3);
+	border-radius: 20px;
+	font-family: 'Century Gothic', Arial;
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+	padding: 1rem;
+	text-align: center;
+}
+
+
+/***********************************************
+				REGISTER AS PROF
+***********************************************/
+.profReg-bg {
+	background: linear-gradient(rgba(255, 255, 255,0.8), rgba(255, 255, 255, 0.8)),
+                url('../images/teacher.png') no-repeat fixed;
+	background-size: 500px 500px;
+	background-position: center center;
+}
+
+/************** END OF REG AS PROF PAGE ************/
+
+
+
+/***********************************************
+				REGISTER AS STUDENT
+***********************************************/
+.studentReg-bg {
+	background: linear-gradient(rgba(255, 255, 255,0.8), rgba(255, 255, 255, 0.8)),
+                url('../images/student.png') no-repeat fixed 1px 1px;
+	background-size: 500px 500px;
+	background-position: center center;
+}
+
+/************** END OF  REG AS STUDENT PAGE ************/
+
+
+/***********************************************
+				PROFESSOR PAGE
+***********************************************/
+.logout {
+	color: white;
+	text-align: right;
+	float: right;
+}
+
+.btnLogout{
+	background-color: #e9ec26;
+	color:#0d7703;
+	border-color: #dfe222;
+	border-radius: 0 0 0 10px;
+	border-style:solid;
+	border-width:2px;
+	font-family: 'Century Gothic', Arial;
+	font-size: 0.8rem;
+	font-weight:bold;
+	padding: 5px;
+	text-align: center;
+	text-decoration: none;
+	margin-left: 10px;
+}
+.btnLogout:hover{
+	color:#e9ec26;
+	background-color:#41a738; 
+	border-color: #54c24a;
+	border-radius: 0 0 0 10px;
+	border-style:solid;
+	border-width:2px;
+	font-family: 'Century Gothic', Arial;
+	font-size:0.8rem;
+	font-weight:bold;
+	text-align: center;
+	text-decoration: none;
+}
+.center {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+.bgCont {
+	background-color: beige;
+	min-height: 900%;
+	max-height: 900%;
+	padding-bottom: 20%;
+}
+.navbar-dark .navbar-nav .nav-link{
+	color: white;
+	margin-right: 10px;
+}
+.navbar-toggler{
+	margin-right: 20%;
+}
+
+.btnSubject {
+	background-color: #0d7703;
+	color: white;
+	text-align: justify;
+	border-radius: 10px;
+	padding: 10px 15px;
+	width: 60%;
+	text-decoration-style: none;
+}
+.btnSubject:hover {
+	background-color: #189e0c;
+	color: white;
+	text-align: justify;
+	border-radius: 10px;
+	padding: 10px 15px;
+	width: 60%;
+	text-decoration-style: none;
+}
+a:hover {
+	text-decoration: none;
+}
+.main-welcome-subtitle {
+	margin-bottom: 2rem;
+	font-family: 'Century Gothic', Arial;
+	font-size: 1.5em;
+}
+
+.welcome-container {
+	background: url('../../resources/images/blackboard1.jpg') center no-repeat;
+	background-size: 80% 90%;
+	border-radius: 50px;
+	border-style: none;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	color: white;
+	font-size: 3rem;
+}
+/************** END OF PROFESSOR PAGE ************/
+
+
+/***********************************************
+				SUBJVIEW PAGE
+***********************************************/
+#user_tbl_head {
+	text-align: center;
+	background-color: #4a9cc2 !important;
+}
+.btnGoBack {
+	border-radius: 50px;
+	padding: 10px 20px;
+	color: white;
+	background-color: #189e0c;
+	margin-top: 50px;
+	margin-right: 2rem;
+}
+.btnGoBack:hover{
+	color: white;
+	text-decoration: none;
+}
+.btnGoBack2 {
+	border-radius: 50px;
+	padding: 10px 20px;
+	color: white;
+	background-color: #189e0c;
+}
+.btnGoBack2:hover{
+	color: white;
+	text-decoration: none;
+}
+.btnImpExp:hover{
+	color: white;
+	text-decoration: none;
+}
+.btnPrint:hover{
+	color: white;
+	text-decoration: none;
+}
+.btnSubmitFinal:hover{
+	color: white;
+	text-decoration: none;
+}
+.btnImpExp{
+	border-radius: 50px;
+	padding: 10px 20px;
+	color: white;
+	background-color: #189e0c;
+	margin-top: 50px;
+	margin-right: 1rem;
+}
+.btnPrint {
+	border-radius: 50px;
+	padding: 10px 20px;
+	color: white;
+	background-color: #189e0c;
+	margin-top: 50px;
+	margin-right: 1rem;
+}
+#btnConfirm {
+	padding: 5px 5px;
+	border-radius: 5px;
+	text-align: center;
+	color: white;
+	background-color: #189e0c;
+	text-decoration: none;
+	border-style: none;
+	padding: 5px 10px;
+}
+#btnConfirm:hover {
+	padding: 5px 5px;
+	border-radius: 5px;
+	text-align: center;
+	color: white;
+	background-color: #37c72a;
+	text-decoration: none;
+	border-style: none;
+	padding: 5px 10px;
+}
+.btnSubmitFinal {
+	border-radius: 50px;
+	padding: 10px 20px;
+	color: white;
+	background-color: #189e0c;
+	text-decoration: none;
+	border: none;
+	cursor: pointer;
+}
+
+/************** END OF SUBJVIEW PAGE ************/
+
+/***********************************************
+				ADMIN PAGE
+***********************************************/
+.admin-login-bg {
+	background-color: #f0ee84;
+	padding: 50px 50px;
+	border-color: none;
+	border-style: none;
+	margin-top: -50px;
+}
+.admin {
+	font-family: 'Century Gothic';
+    font-size: 2rem;
+	color: #bfc0c1;
+	text-align: left;
+}
+.admin-icon {
+	margin-right: 10px;
+}
+.admin-title {
+	font-size: 2rem;
+	text-align: center;
+	font-family: 'Raleway', sans-serif; 
+	margin-top: 2rem;
+}
+.admin-subtitle {
+	font-size: 1.5rem;
+}
+.admin-hr {
+	color: #0d7703;
+	width: 85%;
+	border-width: 3px;
+}
+.btnBackup {
+	border-radius: 20px;
+	padding: 10px 20px;
+	color: white;
+	background-color: #189e0c;
+	margin-top: 1rem;
+	font-size: 1.5rem;
+}
+.btnBackup:hover {
+	color: white;
+}
+#setSySem {
+	text-align: center;
+}
+/************** END OF ADMIN PAGE ************/
+
+/***********************************************
+				USER ACCOUNT
+***********************************************/
+.accountBg {
+	background: linear-gradient(rgba(255, 255, 255,0.3), rgba(255, 255, 255, 0.3)),
+				url('../../resources/images/texture.jpg');
+	background-size: cover;
+}
+.picContainer {
+	float: center;
+	border-style: solid;
+	border-color: green;
+	width: 10rem;
+	height: 10rem;
+}
+.usernameAccount {
+	font-size: 2rem;
+	font-family: 'Century Gothic', sans-serif;
+	text-align: left;
+}
+.account-hr {
+	color: #0d7703;
+	width: 80%;
+	border-width: 3px;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+/************** END OF USER ACCOUNT ************/
+#scroll {
+    position:fixed;
+    right:10px;
+    bottom:10px;
+    cursor:pointer;
+    width:50px;
+    height:50px;
+    background-color:#3498db;
+    text-indent:-9999px;
+    display:none;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+}
+#scroll span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-8px;
+    margin-top:-12px;
+    height:0;
+    width:0;
+    border:8px solid transparent;
+    border-bottom-color:#ffffff
+}
+#scroll:hover {
+    background-color:#e74c3c;
+    opacity:1;
+    filter:"alpha(opacity=100)";
+    -ms-filter:"alpha(opacity=100)";
+}
