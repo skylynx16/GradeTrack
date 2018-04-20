@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2018 at 04:48 AM
+-- Generation Time: Apr 20, 2018 at 08:50 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.34
 
@@ -48,38 +48,6 @@ CREATE TABLE `tblaudittrail` (
   `ActionDone` varchar(255) NOT NULL,
   `DateTimeActionMade` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblaudittrail`
---
-
-INSERT INTO `tblaudittrail` (`ID`, `Username`, `UserType`, `ActionDone`, `DateTimeActionMade`) VALUES
-(1, 'gradetrackadmin', 3, 'Updated SY, Sem, or Grading Period.', '2018-04-20 09:46:51'),
-(2, 'gradetrackadmin', 3, 'Logged Out.', '2018-04-20 09:47:01'),
-(3, 'skylynx16', 2, 'Logged In.', '2018-04-20 10:00:38'),
-(4, 'skylynx16', 2, 'Logged Out.', '2018-04-20 10:03:01'),
-(5, 'gradetrackadmin', 3, 'Logged In.', '2018-04-20 10:03:11'),
-(6, 'gradetrackadmin', 3, 'Updated SY, Sem, or Grading Period.', '2018-04-20 10:03:17'),
-(7, 'gradetrackadmin', 3, 'Logged Out.', '2018-04-20 10:03:19'),
-(8, 'skylynx16', 2, 'Logged In.', '2018-04-20 10:03:31'),
-(9, 'skylynx16', 2, 'Logged Out.', '2018-04-20 10:15:17'),
-(10, 'gradetrackadmin', 3, 'Logged In.', '2018-04-20 10:15:28'),
-(11, 'gradetrackadmin', 3, 'Updated SY, Sem, or Grading Period.', '2018-04-20 10:15:34'),
-(12, 'gradetrackadmin', 3, 'Logged Out.', '2018-04-20 10:15:36'),
-(13, 'skylynx16', 2, 'Logged In.', '2018-04-20 10:15:47'),
-(14, 'skylynx16', 2, 'Set Parent Notification On.', '2018-04-20 10:15:55'),
-(15, 'skylynx16', 2, 'Logged Out.', '2018-04-20 10:18:42'),
-(16, 'skylynx16', 2, 'Logged In.', '2018-04-20 10:36:35'),
-(17, 'skylynx16', 2, 'Logged Out.', '2018-04-20 10:36:54'),
-(18, 'gradetrackadmin', 3, 'Logged In.', '2018-04-20 10:37:04'),
-(19, 'gradetrackadmin', 3, 'Updated SY, Sem, or Grading Period.', '2018-04-20 10:37:11'),
-(20, 'gradetrackadmin', 3, 'Logged Out.', '2018-04-20 10:37:13'),
-(21, 'skylynx16', 2, 'Logged In.', '2018-04-20 10:37:21'),
-(22, 'skylynx16', 2, 'Set Parent Notification On.', '2018-04-20 10:37:52'),
-(23, 'skylynx16', 2, 'Set Parent Notification On.', '2018-04-20 10:40:28'),
-(24, 'skylynx16', 2, 'Set Parent Notification On.', '2018-04-20 10:41:39'),
-(25, 'skylynx16', 2, 'Set Parent Notification On.', '2018-04-20 10:43:07'),
-(26, 'skylynx16', 2, 'Logged Out.', '2018-04-20 10:46:59');
 
 -- --------------------------------------------------------
 
@@ -223,7 +191,11 @@ CREATE TABLE `tblsetsysemgp` (
 --
 
 INSERT INTO `tblsetsysemgp` (`ID`, `SY`, `Sem`, `GradingPeriod`, `datetime_updated`, `prevSem`) VALUES
-(1, '1718', 'A', 'Midterms', '2018-04-20 10:37:10', NULL);
+(1, '1718', 'A', 'Midterms', '2018-04-20 10:37:10', NULL),
+(2, '1718', 'A', 'Finals', '2018-04-20 13:13:17', 'A'),
+(3, '1718', 'B', 'Finals', '2018-04-20 13:16:26', 'A'),
+(4, '1718', 'B', 'Midterms', '2018-04-20 13:19:44', 'B'),
+(5, '1718', 'A', 'Midterms', '2018-04-20 14:06:39', 'B');
 
 -- --------------------------------------------------------
 
@@ -243,6 +215,10 @@ CREATE TABLE `tblstudentguardian` (
 
 INSERT INTO `tblstudentguardian` (`StudNo`, `Guardian`, `Mobile`) VALUES
 ('2000300001', 'Lourdes F. Robles', '09213740479'),
+('2000300002', 'Jessie Perez', '09991234567'),
+('2001300414', 'Linda Flores', '09991234567'),
+('2003300001', 'Jose Mercado', '09991234567'),
+('2014300323', 'Larry Tolentino', '09991234567'),
 ('2014301168', 'Lily Juliano', '09987654321');
 
 -- --------------------------------------------------------
@@ -356,11 +332,11 @@ CREATE TABLE `tblusers` (
 --
 
 INSERT INTO `tblusers` (`UserID`, `Username`, `Email`, `Password`, `UserTypeID`, `lastlogin`, `status`, `IDCode`, `LName`, `FName`, `MName`, `isactive`, `passresetreq`, `isloggedin`, `parentNotif`, `parentNotifIsSet`, `profilePic`) VALUES
-(1, 'gradetrackadmin', 'gradetrack.official@gmail.com', 'e480dd6f0fb0590ad3fd32c0bfd55077ae2f2146984f14115199338dd88d87f4fb83194cc5699d3a7145742f9c02f326162455b1744a394cd4046ef07d286559U1XH9eCxeh85/7/LQzuLIqNrZXMRQK20cMeIY0n47YQ=', '3', '2018-04-20 10:37:04', 'confirmed', NULL, 'Admin', 'Grade', 'Track', 1, NULL, 0, 0, 0, NULL),
-(2, 'skylynx', 'afrobles@tua.edu.ph', 'e6f11531f06f6eba56247a40c88a8a12517a654422b44f4639aa678351219c0acfb80a70f4670d7db8848743cfe17b61f3e63c64d7e75985b31823f9eb62d7bdRETHnJabRzfmlaRrvy6syrvfSsoGZDQL4YcGyUSh1HU=', '1', '2018-04-20 09:38:35', 'confirmed', '12-000-000', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
+(1, 'gradetrackadmin', 'gradetrack.official@gmail.com', 'e480dd6f0fb0590ad3fd32c0bfd55077ae2f2146984f14115199338dd88d87f4fb83194cc5699d3a7145742f9c02f326162455b1744a394cd4046ef07d286559U1XH9eCxeh85/7/LQzuLIqNrZXMRQK20cMeIY0n47YQ=', '3', '2018-04-20 14:06:25', 'confirmed', NULL, 'Admin', 'Grade', 'Track', 1, NULL, 0, 0, 0, NULL),
+(2, 'skylynx', 'afrobles@tua.edu.ph', 'e6f11531f06f6eba56247a40c88a8a12517a654422b44f4639aa678351219c0acfb80a70f4670d7db8848743cfe17b61f3e63c64d7e75985b31823f9eb62d7bdRETHnJabRzfmlaRrvy6syrvfSsoGZDQL4YcGyUSh1HU=', '1', '2018-04-20 14:08:36', 'confirmed', '12-000-000', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
 (3, 'lopez01', 'lopez01@gmail.com', '7930e7c4517d706bd6ba67aa72ed1879a5f59e43758b9cbe82ddeb5e9ab483e61e46512c2f14f843e5a30947c6d246538238d818388c08d9c641b6c196b8e1b35sJ1C+HyV6nRV0ld1xZiHEifiFUbTS+uLi2ZKqGsx8I=', '1', '2018-04-13 06:03:37', 'confirmed', '12-000-001', 'Lopez', 'Mirriam', 'Mendoza', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png'),
 (4, 'perez01', 'perez01@yahoo.com', 'fc8a9a9605a6d0e0d3275357527eaa7e313fb30b2b01c1a8d85c62f8d1e7217413cbbd081399bc843d49f8a1c664e1596e903d3a47764c1aff2515c272135526IJyX2x3YONJKwssPt+Gl2uTWtgcOqRjzL7FRbo5kf+8=', '1', '2018-04-13 06:04:07', 'confirmed', '12-000-002', 'Perez', 'Jamie', 'Bermudez', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png'),
-(5, 'skylynx16', 'andreurobles1416@gmail.com', 'dc89dd6d5d989837540a2466ad1af3820d0baefc9d51c96fa73526d53e73e46b88952479bbded85e3ae1a727f47933236c181d5caf375a3be33c8e3b8b4e175fq6G8lyUpfkahtJK9jiMbw/g4oHaCXhPbRyOtpzhTGqA=', '2', '2018-04-20 10:37:21', 'confirmed', '2013300322', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
+(5, 'skylynx16', 'andreurobles1416@gmail.com', 'dc89dd6d5d989837540a2466ad1af3820d0baefc9d51c96fa73526d53e73e46b88952479bbded85e3ae1a727f47933236c181d5caf375a3be33c8e3b8b4e175fq6G8lyUpfkahtJK9jiMbw/g4oHaCXhPbRyOtpzhTGqA=', '2', '2018-04-20 13:20:46', 'confirmed', '2013300322', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
 (6, 'nadinejuliano', 'bernadinejuliano@gmail.com', '270f84c2d588043893945340a9b6f7b551e403ff6990ddfbfbd91ff290a0b7ae0169ea06a9f6dde93085ec0b4ffe4f4ffb2f8079b974d6921b2ac7aa6d7e63ceAd/lEo07emA6oWfG10pzD2REk9AQU71eMpu2ty56lNk=', '1', '2018-04-11 08:41:56', 'confirmed', '12-000-006', 'Juliano', 'Bernadine', 'Boncay', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png');
 
 -- --------------------------------------------------------
@@ -474,7 +450,7 @@ ALTER TABLE `tblusertypes`
 -- AUTO_INCREMENT for table `tblaudittrail`
 --
 ALTER TABLE `tblaudittrail`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblenrollment`
@@ -486,7 +462,7 @@ ALTER TABLE `tblenrollment`
 -- AUTO_INCREMENT for table `tblsetsysemgp`
 --
 ALTER TABLE `tblsetsysemgp`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbltokens`

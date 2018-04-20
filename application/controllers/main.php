@@ -1055,7 +1055,6 @@ class main extends MY_Controller {
 						$this->session->set_flashdata('msg', 'Wrong Password.');
 						redirect(base_url());
 					}
-							
 				} 
 				else
 				{
@@ -1571,11 +1570,13 @@ class main extends MY_Controller {
 			$audit_trail = array(
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
-				'ActionDone' => 'Updated Grades for '.$this->uri->segment(3).'.',
+				'ActionDone' => 'Updated Midterm Grades for '.$this->uri->segment(3).'.',
 				'DateTimeActionMade' => date('Y-m-d H:i:s')
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+		    //send sms
+		    $this->send_sms2();
 	  	}
 	  	else
 	  	{
@@ -1624,11 +1625,13 @@ class main extends MY_Controller {
 			$audit_trail = array(
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
-				'ActionDone' => 'Updated Grades for '.$this->uri->segment(3).'.',
+				'ActionDone' => 'Updated Pre-Final Grades for '.$this->uri->segment(3).'.',
 				'DateTimeActionMade' => date('Y-m-d H:i:s')
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+		    //send sms
+		    $this->send_sms2();
 	  	}
 	  	else
 	  	{
@@ -1677,11 +1680,13 @@ class main extends MY_Controller {
 			$audit_trail = array(
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
-				'ActionDone' => 'Updated Grades for '.$this->uri->segment(3).'.',
+				'ActionDone' => 'Updated Final Grades for '.$this->uri->segment(3).'.',
 				'DateTimeActionMade' => date('Y-m-d H:i:s')
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+		    //send sms
+		    $this->send_sms2();
 	  	}
 	  	else
 	  	{
@@ -1738,11 +1743,13 @@ class main extends MY_Controller {
 			$audit_trail = array(
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
-				'ActionDone' => 'Updated Grades for '.$this->uri->segment(3).'.',
+				'ActionDone' => 'Updated All Grades for '.$this->uri->segment(3).'.',
 				'DateTimeActionMade' => date('Y-m-d H:i:s')
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+		    //send sms
+		    $this->send_sms2();
 	  	}
 	  	else
 	  	{
@@ -2054,7 +2061,12 @@ class main extends MY_Controller {
 	public function setparentnotifonoff()
 	{
 		$parentnotifonoff = $this->input->post('parentnotifonoff');
-		if($parentnotifonoff == 0){ $switch = 'Off';} else { $switch = 'On'; $this->sendsms();};
+		if($parentnotifonoff == 0) {
+			$switch = 'Off';
+		} else if($parentnotifonoff == 0) {
+			$switch = 'On';
+			$this->sendsms();
+		}
 
 		$tblusersUpdate = array(
 			'parentNotif' => $parentnotifonoff,
@@ -2107,7 +2119,7 @@ class main extends MY_Controller {
 		$response = curl_exec($ch);
 	}
 
-	public function sendsms2()
+	public function send_sms2()
 	{
 		$NEXMO_API_KEY = '43983995';
 		$NEXMO_API_SECRET = 'iq5vP3crNgP5v8nP';
