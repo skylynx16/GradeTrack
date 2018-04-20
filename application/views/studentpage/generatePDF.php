@@ -81,8 +81,8 @@ else
           <td id="user_tbl_data">'.$row->DecMidtermGrade.'</td>
           <td id="user_tbl_data">'.$row->PercPreFinalGrade.'</td>
           <td id="user_tbl_data">'.$row->DecPreFinalGrade.'</td>
+          <td id="user_tbl_data">'.$row->PercFinalGrade.'</td>
           <td id="user_tbl_data">'.$row->FinalGrade.'</td>
-          <td id="user_tbl_data">'.$row->ComputedFinalGrade.'</td>
         </tr>';
     }
 
@@ -106,7 +106,7 @@ else
           <td id="user_tbl_data">'.$row->StudNo.'</td>
           <td id="user_tbl_data">'.$row->StudName.'</td>
           <td id="user_tbl_data">'.$row->PercMidtermGrade.'</td>
-          <td id="user_tbl_data">'.$row->FinalGrade.'</td>
+          <td id="user_tbl_data">'.$row->PercFinalGrade.'</td>
         </tr>';
     }
 

@@ -29,7 +29,9 @@
 			<td id="user_tbl_data" <?php if($parentNotif == 0) {echo 'hidden';} ?>><?php echo $row->DecMidtermGrade; ?></td>
 			<td id="update_btn">
 				<?php
-					if($row->MidtermGradeConfirmed == 0)
+					if($row->PercMidtermGrade != '')
+					{
+						if($row->MidtermGradeConfirmed == 0)
 						{
 							$StudNo = $row->StudNo;
 							$tblName = strtolower(str_replace(".","",str_replace("_","",$this->uri->segment(3))));
@@ -38,12 +40,17 @@
 						} else { 
 							echo 'Confirmed'; 
 						} 
+					}
+					else
+					{
+						echo 'No grades yet.';
+					} 
 				?>
 			</td>
 			<td id="user_tbl_data" <?php if($parentNotif == 0) {echo 'hidden';} ?>><?php echo $row->PercPreFinalGrade; ?></td>
 			<td id="user_tbl_data" <?php if($parentNotif == 0) {echo 'hidden';} ?>><?php echo $row->DecPreFinalGrade; ?></td>
-			<td id="user_tbl_data"><?php echo $row->FinalGrade; ?></td>
-			<td id="user_tbl_data" <?php if($parentNotif == 0) {echo 'hidden';} ?>><?php echo $row->ComputedFinalGrade; ?></td>
+			<td id="user_tbl_data"><?php echo $row->PercFinalGrade; ?></td>
+			<td id="user_tbl_data" <?php if($parentNotif == 0) {echo 'hidden';} ?>><?php echo $row->FinalGrade; ?></td>
 		</tr>
 	<?php endforeach; ?>
 	<?php endif; ?>
@@ -80,6 +87,7 @@
         success:function(data){
         	if(data == 1) {
 	        	alert('Midterm Grade has been confirmed.');
+	        	location.reload();
 	        }
 	        else {
 	        	alert('Error in confirming midterm grade.');

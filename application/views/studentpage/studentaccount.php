@@ -14,7 +14,7 @@
                         <p style="font-size: 1.5rem";><b>Student Number:</b> <?php echo $this->session->userdata('IDCode') ?></p>
                         <a href="<?php echo base_url(); ?>main/changePassword.html" style="font-size: 1rem";>Change Password</a>
                         <form id="setsysemgp">
-                        <p style="font-size: 1rem; ">Allow Parent Notification for this Semester?<br>
+                        <p style="font-size: 1rem; ">Allow Guardian Notification for this Semester?<br>
                         <select style="width: 20%; font-size: 1rem; " id="parentnotifonoff" name="parentnotifonoff"
                             <?php if($parentNotifIsSet == 1 || $GradingPeriod != 'Midterms') { echo 'disabled'; } ?>>
                             <option value="0" <?php if($parentNotif == 0) {echo 'selected';} ?>>Off (default)</option>
@@ -35,7 +35,7 @@
 
 <script>
     function setParentNotifIsSet() {
-        if(confirm("Once set, this setting will be applied and will be disabled for the whole semester. This will be enabled again next semester. Are you sure about this setting?"))
+        if(confirm("When setting this feature on, you are hereby allowing your listed guardian to receive message notifications whenever your grades are updated. Leaving this feature off will not trigger guardian notification and the grades displayed on the system will not be complete.\n\nOnce set, this setting will be applied and will be disabled for the whole semester. This will be enabled again next semester. Are you sure about this setting?"))
         {
             $.ajax({
                 url:"<?php echo base_url(); ?>main/setparentnotifonoff",

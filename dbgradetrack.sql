@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2018 at 08:50 AM
+-- Generation Time: Apr 20, 2018 at 06:20 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.34
 
@@ -46,8 +46,18 @@ CREATE TABLE `tblaudittrail` (
   `Username` varchar(30) NOT NULL,
   `UserType` int(1) DEFAULT NULL,
   `ActionDone` varchar(255) NOT NULL,
-  `DateTimeActionMade` datetime DEFAULT NULL
+  `DateTimeActionMade` datetime DEFAULT NULL,
+  `ip_address` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblaudittrail`
+--
+
+INSERT INTO `tblaudittrail` (`ID`, `Username`, `UserType`, `ActionDone`, `DateTimeActionMade`, `ip_address`) VALUES
+(1, 'gradetrackadmin', 3, 'Logged In.', '2018-04-21 00:18:33', '::1'),
+(2, 'gradetrackadmin', 3, 'Updated SY, Sem, or Grading Period.', '2018-04-21 00:18:57', '::1'),
+(3, 'gradetrackadmin', 3, 'Logged Out.', '2018-04-21 00:18:59', '::1');
 
 -- --------------------------------------------------------
 
@@ -66,27 +76,34 @@ CREATE TABLE `tblenrollment` (
   `SubjCode` varchar(255) NOT NULL,
   `ESubjCode` varchar(15) NOT NULL,
   `StudNo` varchar(15) NOT NULL,
-  `FinalGrade` varchar(10) NOT NULL,
-  `ComputedFinalGrade` varchar(8) NOT NULL
+  `FinalGrade` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblenrollment`
 --
 
-INSERT INTO `tblenrollment` (`ID`, `SY`, `CourseCode`, `YearLevel`, `Sem`, `ParentSection`, `SectCode`, `SubjCode`, `ESubjCode`, `StudNo`, `FinalGrade`, `ComputedFinalGrade`) VALUES
-(1, '1718', '3025A', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE_204', 'INTE_204', '2000300001', '', ''),
-(2, '1718', '3025A', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE_204', 'INTE_204', '2014301168', '', ''),
-(3, '1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE_203', 'INTE_203', '2000300002', '', ''),
-(4, '1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE_203', 'INTE_203', '2013300322', '', ''),
-(5, '1718', '3025C', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE_603', 'INTE_603', '2014300323', '', ''),
-(6, '1718', '3025C', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE_603', 'INTE_603', '2001300414', '', ''),
-(7, '1718', '3025A', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE.204', 'INTE.204', '2000300001', '', ''),
-(8, '1718', '3025A', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE.204', 'INTE.204', '2014301168', '', ''),
-(9, '1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE.203', 'INTE.203', '2000300002', '', ''),
-(10, '1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE.203', 'INTE.203', '2013300322', '', ''),
-(11, '1718', '3025C', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE.603', 'INTE.603', '2014300323', '', ''),
-(12, '1718', '3025C', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE.603', 'INTE.603', '2001300414', '', '');
+INSERT INTO `tblenrollment` (`ID`, `SY`, `CourseCode`, `YearLevel`, `Sem`, `ParentSection`, `SectCode`, `SubjCode`, `ESubjCode`, `StudNo`, `FinalGrade`) VALUES
+(1, '1718', '3025A', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE_204', 'INTE_204', '2000300001', ''),
+(2, '1718', '3025A', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE_204', 'INTE_204', '2014301168', ''),
+(3, '1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE_203', 'INTE_203', '2000300002', ''),
+(4, '1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE_203', 'INTE_203', '2013300322', ''),
+(5, '1718', '3025C', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE_603', 'INTE_603', '2014300323', ''),
+(6, '1718', '3025C', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE_603', 'INTE_603', '2001300414', ''),
+(7, '1718', '3025A', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE.204', 'INTE.204', '2000300001', ''),
+(8, '1718', '3025A', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE.204', 'INTE.204', '2014301168', ''),
+(9, '1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE.203', 'INTE.203', '2000300002', ''),
+(10, '1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE.203', 'INTE.203', '2013300322', ''),
+(11, '1718', '3025C', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE.603', 'INTE.603', '2014300323', ''),
+(12, '1718', '3025C', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE.603', 'INTE.603', '2001300414', ''),
+(13, '1718', '3025B', 4, 'B', '4ITSE01', '3025B 4-4ITSE01', 'INTE_212', 'INTE_212', '2013300322', ''),
+(14, '1718', '3025B', 4, 'B', '4ITSE01', '3025B 4-4ITSE01', 'INTE_212', 'INTE_212', '2000300002', ''),
+(15, '1718', '3025B', 4, 'B', '4ITSE01', '3025B 4-4ITSE01', 'INTE.212', 'INTE.212', '2013300322', ''),
+(16, '1718', '3025B', 4, 'B', '4ITSE01', '3025B 4-4ITSE01', 'INTE.212', 'INTE.212', '2000300002', ''),
+(17, '1718', '3025B', 4, 'C', '4ITSE01', '3025B 4-4ITSE01', 'INTE_218', 'INTE_218', '2013300322', ''),
+(18, '1718', '3025B', 4, 'C', '4ITSE01', '3025B 4-4ITSE01', 'INTE_218', 'INTE_218', '2000300002', ''),
+(19, '1718', '3025B', 4, 'C', '4ITSE01', '3025B 4-4ITSE01', 'INTE.218', 'INTE.218', '2013300322', ''),
+(20, '1718', '3025B', 4, 'C', '4ITSE01', '3025B 4-4ITSE01', 'INTE.218', 'INTE.218', '2000300002', '');
 
 -- --------------------------------------------------------
 
@@ -166,9 +183,13 @@ CREATE TABLE `tblschedule` (
 INSERT INTO `tblschedule` (`SY`, `CourseCode`, `YearLevel`, `Sem`, `ParentSection`, `SectCode`, `SubjCode`, `FCode`) VALUES
 ('1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE.203', '12-000-000'),
 ('1718', '3025B', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE.204', '12-000-001'),
+('1718', '3025B', 4, 'B', '4ITSE01', '3025B 4-4ITSE01', 'INTE.212', '12-000-000'),
+('1718', '3025B', 4, 'C', '4ITSE01', '3025B 4-4ITSE01', 'INTE.218', '12-000-000'),
 ('1718', '3025B', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE.603', '12-000-006'),
 ('1718', '3025B', 4, 'A', '4ITSE01', '3025B 4-4ITSE01', 'INTE_203', '12-000-000'),
 ('1718', '3025B', 4, 'A', '4ITMW01', '3025A 4-4ITMW01', 'INTE_204', '12-000-001'),
+('1718', '3025B', 4, 'B', '4ITSE01', '3025B 4-4ITSE01', 'INTE_212', '12-000-000'),
+('1718', '3025B', 4, 'C', '4ITSE01', '3025B 4-4ITSE01', 'INTE_218', '12-000-000'),
 ('1718', '3025B', 4, 'A', '4ITMA01', '3025C 4-4ITMA01', 'INTE_603', '12-000-006');
 
 -- --------------------------------------------------------
@@ -191,11 +212,7 @@ CREATE TABLE `tblsetsysemgp` (
 --
 
 INSERT INTO `tblsetsysemgp` (`ID`, `SY`, `Sem`, `GradingPeriod`, `datetime_updated`, `prevSem`) VALUES
-(1, '1718', 'A', 'Midterms', '2018-04-20 10:37:10', NULL),
-(2, '1718', 'A', 'Finals', '2018-04-20 13:13:17', 'A'),
-(3, '1718', 'B', 'Finals', '2018-04-20 13:16:26', 'A'),
-(4, '1718', 'B', 'Midterms', '2018-04-20 13:19:44', 'B'),
-(5, '1718', 'A', 'Midterms', '2018-04-20 14:06:39', 'B');
+(1, '1718', 'A', 'Midterms', '2018-04-21 00:18:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -271,9 +288,13 @@ CREATE TABLE `tblsubject` (
 INSERT INTO `tblsubject` (`SubjCode`, `Description`) VALUES
 ('INTE.203', 'Basic Networking (Laboratory)'),
 ('INTE.204', 'Systems Analysis and Design (Laboratory)'),
+('INTE.212', 'Database Management Systems 1 (Laboratory)'),
+('INTE.218', 'Operating Systems (Laboratory)'),
 ('INTE.603', 'Advanced Multimedia Systems (Laboratory)'),
 ('INTE_203', 'Basic Networking (Lecture)'),
 ('INTE_204', 'Systems Analysis and Design (Lecture)'),
+('INTE_212', 'Database Management Systems 1 (Lecture)'),
+('INTE_218', 'Operating Systems (Lecture)'),
 ('INTE_603', 'Advanced Multimedia Systems (Lecture)');
 
 -- --------------------------------------------------------
@@ -332,11 +353,11 @@ CREATE TABLE `tblusers` (
 --
 
 INSERT INTO `tblusers` (`UserID`, `Username`, `Email`, `Password`, `UserTypeID`, `lastlogin`, `status`, `IDCode`, `LName`, `FName`, `MName`, `isactive`, `passresetreq`, `isloggedin`, `parentNotif`, `parentNotifIsSet`, `profilePic`) VALUES
-(1, 'gradetrackadmin', 'gradetrack.official@gmail.com', 'e480dd6f0fb0590ad3fd32c0bfd55077ae2f2146984f14115199338dd88d87f4fb83194cc5699d3a7145742f9c02f326162455b1744a394cd4046ef07d286559U1XH9eCxeh85/7/LQzuLIqNrZXMRQK20cMeIY0n47YQ=', '3', '2018-04-20 14:06:25', 'confirmed', NULL, 'Admin', 'Grade', 'Track', 1, NULL, 0, 0, 0, NULL),
-(2, 'skylynx', 'afrobles@tua.edu.ph', 'e6f11531f06f6eba56247a40c88a8a12517a654422b44f4639aa678351219c0acfb80a70f4670d7db8848743cfe17b61f3e63c64d7e75985b31823f9eb62d7bdRETHnJabRzfmlaRrvy6syrvfSsoGZDQL4YcGyUSh1HU=', '1', '2018-04-20 14:08:36', 'confirmed', '12-000-000', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
+(1, 'gradetrackadmin', 'gradetrack.official@gmail.com', 'e480dd6f0fb0590ad3fd32c0bfd55077ae2f2146984f14115199338dd88d87f4fb83194cc5699d3a7145742f9c02f326162455b1744a394cd4046ef07d286559U1XH9eCxeh85/7/LQzuLIqNrZXMRQK20cMeIY0n47YQ=', '3', '2018-04-21 00:18:33', 'confirmed', NULL, 'Admin', 'Grade', 'Track', 1, NULL, 0, 0, 0, NULL),
+(2, 'skylynx', 'afrobles@tua.edu.ph', 'e6f11531f06f6eba56247a40c88a8a12517a654422b44f4639aa678351219c0acfb80a70f4670d7db8848743cfe17b61f3e63c64d7e75985b31823f9eb62d7bdRETHnJabRzfmlaRrvy6syrvfSsoGZDQL4YcGyUSh1HU=', '1', '2018-04-21 00:11:49', 'confirmed', '12-000-000', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
 (3, 'lopez01', 'lopez01@gmail.com', '7930e7c4517d706bd6ba67aa72ed1879a5f59e43758b9cbe82ddeb5e9ab483e61e46512c2f14f843e5a30947c6d246538238d818388c08d9c641b6c196b8e1b35sJ1C+HyV6nRV0ld1xZiHEifiFUbTS+uLi2ZKqGsx8I=', '1', '2018-04-13 06:03:37', 'confirmed', '12-000-001', 'Lopez', 'Mirriam', 'Mendoza', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png'),
 (4, 'perez01', 'perez01@yahoo.com', 'fc8a9a9605a6d0e0d3275357527eaa7e313fb30b2b01c1a8d85c62f8d1e7217413cbbd081399bc843d49f8a1c664e1596e903d3a47764c1aff2515c272135526IJyX2x3YONJKwssPt+Gl2uTWtgcOqRjzL7FRbo5kf+8=', '1', '2018-04-13 06:04:07', 'confirmed', '12-000-002', 'Perez', 'Jamie', 'Bermudez', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png'),
-(5, 'skylynx16', 'andreurobles1416@gmail.com', 'dc89dd6d5d989837540a2466ad1af3820d0baefc9d51c96fa73526d53e73e46b88952479bbded85e3ae1a727f47933236c181d5caf375a3be33c8e3b8b4e175fq6G8lyUpfkahtJK9jiMbw/g4oHaCXhPbRyOtpzhTGqA=', '2', '2018-04-20 13:20:46', 'confirmed', '2013300322', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
+(5, 'skylynx16', 'andreurobles1416@gmail.com', 'dc89dd6d5d989837540a2466ad1af3820d0baefc9d51c96fa73526d53e73e46b88952479bbded85e3ae1a727f47933236c181d5caf375a3be33c8e3b8b4e175fq6G8lyUpfkahtJK9jiMbw/g4oHaCXhPbRyOtpzhTGqA=', '2', '2018-04-21 00:11:18', 'confirmed', '2013300322', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
 (6, 'nadinejuliano', 'bernadinejuliano@gmail.com', '270f84c2d588043893945340a9b6f7b551e403ff6990ddfbfbd91ff290a0b7ae0169ea06a9f6dde93085ec0b4ffe4f4ffb2f8079b974d6921b2ac7aa6d7e63ceAd/lEo07emA6oWfG10pzD2REk9AQU71eMpu2ty56lNk=', '1', '2018-04-11 08:41:56', 'confirmed', '12-000-006', 'Juliano', 'Bernadine', 'Boncay', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png');
 
 -- --------------------------------------------------------
@@ -450,19 +471,19 @@ ALTER TABLE `tblusertypes`
 -- AUTO_INCREMENT for table `tblaudittrail`
 --
 ALTER TABLE `tblaudittrail`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tblenrollment`
 --
 ALTER TABLE `tblenrollment`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tblsetsysemgp`
 --
 ALTER TABLE `tblsetsysemgp`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbltokens`

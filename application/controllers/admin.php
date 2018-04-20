@@ -84,7 +84,8 @@ class admin extends MY_Controller {
 							'Username' => $getPassword[0]->Username,
 							'UserType' => $getPassword[0]->UserTypeID,
 							'ActionDone' => 'Logged In.',
-							'DateTimeActionMade' => date('Y-m-d H:i:s')
+							'DateTimeActionMade' => date('Y-m-d H:i:s'),
+							'ip_address' => $this->input->ip_address()
 						);
 						//Audit Trail
 				        $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -161,7 +162,8 @@ class admin extends MY_Controller {
 			'Username' => $this->session->userdata('Username'),
 			'UserType' => $this->session->userdata('UserTypeID'),
 			'ActionDone' => 'Logged Out.',
-			'DateTimeActionMade' => date('Y-m-d H:i:s')
+			'DateTimeActionMade' => date('Y-m-d H:i:s'),
+			'ip_address' => $this->input->ip_address()
 		);
 		//Audit Trail
 		$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -181,7 +183,8 @@ class admin extends MY_Controller {
 			'Username' => $this->session->userdata('Username'),
 			'UserType' => $this->session->userdata('UserTypeID'),
 			'ActionDone' => 'Backed Up Database.',
-			'DateTimeActionMade' => date('Y-m-d H:i:s')
+			'DateTimeActionMade' => date('Y-m-d H:i:s'),
+			'ip_address' => $this->input->ip_address()
 		);
 		//Audit Trail
 		$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -256,7 +259,7 @@ class admin extends MY_Controller {
 				$tables = array('tblaudittrail'), 
 				$fieldName = null,
 				$where = null,
-				$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
+				$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = array('10','0'), 
 				$fieldNameLike = null, $like = null, 
 				$whereSpecial = null, $groupBy = null );
 
@@ -351,7 +354,8 @@ class admin extends MY_Controller {
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
 				'ActionDone' => 'Updated SY, Sem, or Grading Period.',
-				'DateTimeActionMade' => date('Y-m-d H:i:s')
+				'DateTimeActionMade' => date('Y-m-d H:i:s'),
+				'ip_address' => $this->input->ip_address()
 			);
 			//Audit Trail
 			$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -436,7 +440,7 @@ class admin extends MY_Controller {
 			$tables = array('tblaudittrail'), 
 			$fieldName = null,
 			$where = null,
-			$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+			$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
 			$fieldNameLike = array('Username','ActionDone','DateTimeActionMade'),
 			$like = array($clean['Username'],$clean['ActionDone'],$clean['DateTime']), 
 			$whereSpecial = null, $groupBy = null );

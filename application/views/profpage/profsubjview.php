@@ -6,7 +6,7 @@
 				<u>Subject Description:</u> <?php echo str_replace("%20", " ", $this->uri->segment(5)); ?><br>
 				<u>Section Code:</u> <?php echo str_replace("%20", " ", $this->uri->segment(4)); ?><br>
 				<u>School Year:</u> <?php echo '20'.substr($SY,0,2).'-20'.substr($SY,2,3); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<u>Semester:</u> <?php if($Sem == 'A') {echo '1st';} else {echo '2nd';} ?>
+				<u>Semester:</u> <?php if($Sem == 'A') {echo '1st';} else if($Sem == 'B') {echo '2nd';} else {echo 'Summer';} ?>
 			</p>
 		</div>
 		<div class="col-md-5">
@@ -49,8 +49,8 @@
 						<td id="user_tbl_data"><?php if($row->MidtermGradeConfirmed == 0){ echo 'Unconfirmed'; } else {echo 'Confirmed';} ?></td>
 						<td id="user_tbl_data"><?php echo $row->PercPreFinalGrade; ?></td>
 						<td id="user_tbl_data"><?php echo $row->DecPreFinalGrade; ?></td>
+						<td id="user_tbl_data"><?php echo $row->PercFinalGrade; ?></td>
 						<td id="user_tbl_data"><?php echo $row->FinalGrade; ?></td>
-						<td id="user_tbl_data"><?php echo $row->ComputedFinalGrade; ?></td>
 					</tr>
 				<?php endforeach; ?>
 				<?php endif; ?>

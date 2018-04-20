@@ -770,7 +770,8 @@ class main extends MY_Controller {
 				'Username' => $userInfo[0]->Username,
 				'UserType' => $userInfo[0]->UserTypeID,
 				'ActionDone' => 'Registered as a member.',
-				'DateTimeActionMade' => date('Y-m-d H:i:s')
+				'DateTimeActionMade' => date('Y-m-d H:i:s'),
+				'ip_address' => $this->input->ip_address()
 			);
 			//Audit Trail
 	        $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -855,7 +856,8 @@ class main extends MY_Controller {
 			'Username' => $getUserInfo[0]->Username,
 			'UserType' => $getUserInfo[0]->UserTypeID,
 			'ActionDone' => 'Requested Password Reset.',
-			'DateTimeActionMade' => date('Y-m-d H:i:s')
+			'DateTimeActionMade' => date('Y-m-d H:i:s'),
+			'ip_address' => $this->input->ip_address()
 		);
 		//Audit Trail
 		$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -956,7 +958,8 @@ class main extends MY_Controller {
 					'Username' => $userInfo[0]->Username,
 					'UserType' => $userInfo[0]->UserTypeID,
 					'ActionDone' => 'Reset Password.',
-					'DateTimeActionMade' => date('Y-m-d H:i:s')
+					'DateTimeActionMade' => date('Y-m-d H:i:s'),
+					'ip_address' => $this->input->ip_address()
 				);
 				//Audit Trail
 		        $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -1030,13 +1033,12 @@ class main extends MY_Controller {
 							'Username' => $getPassword[0]->Username,
 							'UserType' => $getPassword[0]->UserTypeID,
 							'ActionDone' => 'Logged In.',
-							'DateTimeActionMade' => date('Y-m-d H:i:s')
+							'DateTimeActionMade' => date('Y-m-d H:i:s'),
+							'ip_address' => $this->input->ip_address()
 						);
 						//Audit Trail
 				        $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
 
-				        $this->sendsms();
-							
 						if($getPassword[0]->UserTypeID == 1)
 						{
 							redirect(base_url().'main/professor_page.html');
@@ -1086,7 +1088,8 @@ class main extends MY_Controller {
 			'Username' => $this->session->userdata('Username'),
 			'UserType' => $this->session->userdata('UserTypeID'),
 			'ActionDone' => 'Logged Out.',
-			'DateTimeActionMade' => date('Y-m-d H:i:s')
+			'DateTimeActionMade' => date('Y-m-d H:i:s'),
+			'ip_address' => $this->input->ip_address()
 		);
 		//Audit Trail
 	    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -1142,6 +1145,7 @@ class main extends MY_Controller {
 				$whereSpecial = null, $groupBy = null );
 
 			$data['subjects'] = $this->gt_model->getsubjectsenrolled($this->session->userdata('IDCode'), $getData[0]->SY, $getData[0]->Sem);
+			$data['Sem'] = $getData[0]->Sem;
 
 			header("Access-Control-Allow-Origin: *");
 			$title['title'] = "Student - Enrolled Subjects";
@@ -1310,7 +1314,8 @@ class main extends MY_Controller {
 					'Username' => $this->session->userdata('Username'),
 					'UserType' => $this->session->userdata('UserTypeID'),
 					'ActionDone' => 'Confirmed Midterm Grades.',
-					'DateTimeActionMade' => date('Y-m-d H:i:s')
+					'DateTimeActionMade' => date('Y-m-d H:i:s'),
+					'ip_address' => $this->input->ip_address()
 				);
 				//Audit Trail
 			    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -1461,7 +1466,7 @@ class main extends MY_Controller {
 		  	{
 			   $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $row->StudNo);
 			   $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->StudName);
-			   $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->FinalGrade);
+			   $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->PercFinalGrade);
 			   $excel_row++;
 		  	}
 
@@ -1508,7 +1513,7 @@ class main extends MY_Controller {
 			   $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->StudName);
 			   $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->PercMidtermGrade);
 			   $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $row->PercPreFinalGrade);
-			   $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->FinalGrade);
+			   $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->PercFinalGrade);
 			   $excel_row++;
 		  	}
 
@@ -1571,7 +1576,8 @@ class main extends MY_Controller {
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
 				'ActionDone' => 'Updated Midterm Grades for '.$this->uri->segment(3).'.',
-				'DateTimeActionMade' => date('Y-m-d H:i:s')
+				'DateTimeActionMade' => date('Y-m-d H:i:s'),
+				'ip_address' => $this->input->ip_address()
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -1626,7 +1632,8 @@ class main extends MY_Controller {
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
 				'ActionDone' => 'Updated Pre-Final Grades for '.$this->uri->segment(3).'.',
-				'DateTimeActionMade' => date('Y-m-d H:i:s')
+				'DateTimeActionMade' => date('Y-m-d H:i:s'),
+				'ip_address' => $this->input->ip_address()
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -1667,8 +1674,8 @@ class main extends MY_Controller {
 	     			$data[] = array(
 	      				'StudNo'  => $StudNo,
 	      				'StudName'   => $StudName,
-	      				'FinalGrade'   => $PercFinalGrade,
-	      				'ComputedFinalGrade'	=> $DecFinalGrade
+	      				'PercFinalGrade'   => $PercFinalGrade,
+	      				'FinalGrade'	=> $DecFinalGrade
 	     			);
 	    		}
 	   		}
@@ -1681,7 +1688,8 @@ class main extends MY_Controller {
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
 				'ActionDone' => 'Updated Final Grades for '.$this->uri->segment(3).'.',
-				'DateTimeActionMade' => date('Y-m-d H:i:s')
+				'DateTimeActionMade' => date('Y-m-d H:i:s'),
+				'ip_address' => $this->input->ip_address()
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -1728,10 +1736,10 @@ class main extends MY_Controller {
 	      				'StudName'   => $StudName,
 	      				'PercMidtermGrade'    => $PercMidtermGrade,
 	      				'PercPreFinalGrade'  => $PercPreFinalGrade,
-	      				'FinalGrade'   => $PercFinalGrade,
+	      				'PercFinalGrade'   => $PercFinalGrade,
 	      				'DecMidtermGrade'	=> $DecMidtermGrade,
 	      				'DecPreFinalGrade'	=> $DecPreFinalGrade,
-	      				'ComputedFinalGrade'	=> $DecFinalGrade
+	      				'FinalGrade'	=> $DecFinalGrade
 	     			);
 	    		}
 	   		}
@@ -1744,7 +1752,8 @@ class main extends MY_Controller {
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
 				'ActionDone' => 'Updated All Grades for '.$this->uri->segment(3).'.',
-				'DateTimeActionMade' => date('Y-m-d H:i:s')
+				'DateTimeActionMade' => date('Y-m-d H:i:s'),
+				'ip_address' => $this->input->ip_address()
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -1815,7 +1824,7 @@ class main extends MY_Controller {
 		$tblName = 'tbl'.str_replace(".","",str_replace("_","",$this->uri->segment(3)))."_".strtolower(str_replace("-","_",str_replace("%20", "_",$this->uri->segment(4)))).'_'.$this->uri->segment(5).'_'.$this->uri->segment(6);
 
 		//get the final perc and dec grades from the created subject table
-		$getDataFromCreatedSubjTbl = $this->_getRecordsData($data = array('StudNo','FinalGrade','ComputedFinalGrade'), 
+		$getDataFromCreatedSubjTbl = $this->_getRecordsData($data = array('StudNo','FinalGrade'), 
 			$tables = array($tblName), 
 			$fieldName = null, $where = null, $join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null );
 		
@@ -1828,7 +1837,8 @@ class main extends MY_Controller {
 			'Username' => $this->session->userdata('Username'),
 			'UserType' => $this->session->userdata('UserTypeID'),
 			'ActionDone' => 'Submitted Final Grades for '.$this->uri->segment(3).'.',
-			'DateTimeActionMade' => date('Y-m-d H:i:s')
+			'DateTimeActionMade' => date('Y-m-d H:i:s'),
+			'ip_address' => $this->input->ip_address()
 		);
 		//Audit Trail
 		$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -2014,7 +2024,8 @@ class main extends MY_Controller {
 					'Username' => $this->session->userdata('Username'),
 					'UserType' => $this->session->userdata('UserTypeID'),
 					'ActionDone' => 'Changed Password.',
-					'DateTimeActionMade' => date('Y-m-d H:i:s')
+					'DateTimeActionMade' => date('Y-m-d H:i:s'),
+					'ip_address' => $this->input->ip_address()
 				);
 				//Audit Trail
 			    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -2063,7 +2074,7 @@ class main extends MY_Controller {
 		$parentnotifonoff = $this->input->post('parentnotifonoff');
 		if($parentnotifonoff == 0) {
 			$switch = 'Off';
-		} else if($parentnotifonoff == 0) {
+		} else if($parentnotifonoff == 1) {
 			$switch = 'On';
 			$this->sendsms();
 		}
@@ -2080,8 +2091,9 @@ class main extends MY_Controller {
 		$audit_trail = array(
 			'Username' => $this->session->userdata('Username'),
 			'UserType' => $this->session->userdata('UserTypeID'),
-			'ActionDone' => 'Set Parent Notification '.$switch.'.',
-			'DateTimeActionMade' => date('Y-m-d H:i:s')
+			'ActionDone' => 'Set Guardian Notification '.$switch.'.',
+			'DateTimeActionMade' => date('Y-m-d H:i:s'),
+			'ip_address' => $this->input->ip_address()
 		);
 		//Audit Trail
 		$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
@@ -2111,7 +2123,7 @@ class main extends MY_Controller {
 		    'api_secret' => $NEXMO_API_SECRET,
 		    'to' => $TO_NUMBER,
 		    'from' =>'Gradetrack Admin',
-		    'text' => 'Your child has activated Parent Notifications. This means that you will be receiving message notifications whenever their grades are updated. Thank you and have a good day! From: GradeTrack Admin'
+		    'text' => 'Your child has activated Guardian Notifications. This means that you will be receiving message notifications whenever their grades are updated. Thank you and have a good day! From: GradeTrack Admin'
 		]);
 
 		$ch = curl_init($url);
@@ -2121,22 +2133,33 @@ class main extends MY_Controller {
 
 	public function send_sms2()
 	{
-		$NEXMO_API_KEY = '43983995';
-		$NEXMO_API_SECRET = 'iq5vP3crNgP5v8nP';
+		$checkIfSend = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblusers'), 
+				$fieldName = array('IDCode'), 
+				$where = array('2013300322'), 
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
 
-		$TO_NUMBER = '639166574037';
+		if($checkIfSend[0]->parentNotif == 1)
+		{
+			$NEXMO_API_KEY = '43983995';
+			$NEXMO_API_SECRET = 'iq5vP3crNgP5v8nP';
 
-		$url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
-		    'api_key' => $NEXMO_API_KEY,
-		    'api_secret' => $NEXMO_API_SECRET,
-		    'to' => $TO_NUMBER,
-		    'from' =>'Gradetrack Admin',
-		    'text' => 'Your child\'s grades are updated. From: GradeTrack Admin'
-		]);
+			$TO_NUMBER = '639166574037';
 
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$response = curl_exec($ch);
+			$url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
+			    'api_key' => $NEXMO_API_KEY,
+			    'api_secret' => $NEXMO_API_SECRET,
+			    'to' => $TO_NUMBER,
+			    'from' =>'Gradetrack Admin',
+			    'text' => 'Your child\'s grades are updated. From: GradeTrack Admin'
+			]);
+
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$response = curl_exec($ch);
+		}
 	}
 /********************************************** END SEND SMS ************************************************** */
 }	

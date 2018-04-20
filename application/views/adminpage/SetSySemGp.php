@@ -32,6 +32,7 @@
                 <select style="width: 100%;" id="semester" name="semester">
                     <option value="A" <?php if($Sem == 'A') echo 'selected'; ?>>A</option>
                     <option value="B" <?php if($Sem == 'B') echo 'selected'; ?>>B</option>
+                    <option value="C" <?php if($Sem == 'C') echo 'selected'; ?>>C</option>
                 </select>
             </div>
         </div>

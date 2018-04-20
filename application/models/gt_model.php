@@ -227,8 +227,8 @@ class gt_model extends CI_Model
 		    MidtermGradeConfirmed int default 0,
 		    PercPreFinalGrade DECIMAL(8,2),
 		    DecPreFinalGrade DECIMAL(8,2),
-		    FinalGrade DECIMAL(8,2),
-		    ComputedFinalGrade DECIMAL(8,2)
+		    PercFinalGrade DECIMAL(8,2),
+		    FinalGrade DECIMAL(8,2)
 		);"
 		);
 

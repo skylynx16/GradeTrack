@@ -34,6 +34,7 @@
 						<td id="user_tbl_data">User Type</td>
 						<td id="user_tbl_data">Action Done</td>
 						<td id="user_tbl_data">Date &amp; Time Action Made</td>
+						<td id="user_tbl_data">IP Address</td>
 					</tr>
 				<?php if(isset($tblaudittrail)) : foreach($tblaudittrail as $row) : ?>
 					<tr id="user_tbl_content">
@@ -41,6 +42,7 @@
 						<td id="user_tbl_data"><?php if($row->UserType == 1) {echo 'Professor';} else if($row->UserType == 2){echo 'Student';} else if($row->UserType == 3) {echo 'Admin';} ?></td>
 						<td id="user_tbl_data"><?php echo $row->ActionDone; ?></td>
 						<td id="user_tbl_data"><?php echo $row->DateTimeActionMade; ?></td>
+						<td id="user_tbl_data"><?php echo $row->ip_address; ?></td>
 					</tr>
 				<?php endforeach; ?>
 				<?php endif; ?>
