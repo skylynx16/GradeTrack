@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class main extends MY_Controller {
+class Main extends MY_Controller {
 
 	function __construct() {
         parent::__construct();
@@ -20,6 +20,27 @@ class main extends MY_Controller {
 			);
 
 			$recordUpdated = $this->_updateRecords($tableName = 'tblusers', $fieldName = array('UserID'), $where = array($this->session->userdata('UserID')), $tblusersUpdate);
+		}
+
+		//Check if Prof Accounts should be disabled.
+		$getDateofDeadline= $this->_getRecordsData($data = array('*'), $tables = array('tbldeadlines'), $fieldName = null, $where = null, 
+			$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
+			$fieldNameLike = null, $like = null, 
+			$whereSpecial = null, $groupBy = null );
+
+		$dateToday = date('Y-m-d');
+
+		if($getDateofDeadline[0]->manualOverride == 0)
+		{
+			if(strtotime($getDateofDeadline[0]->deadlineDate) < strtotime($dateToday) && !empty(@$getDateofDeadline[0]->deadlineDate))
+			{
+				//lock system for porfessors
+				$tblusersUpdate = array(
+					'deadlineTrigger' => 1
+				);
+
+				$recordUpdated = $this->_updateRecords($tableName = 'tblusers', $fieldName = array('UserTypeID'), $where = array(1), $tblusersUpdate);
+			}
 		}
 
 		header("Access-Control-Allow-Origin: *");
@@ -582,7 +603,7 @@ class main extends MY_Controller {
 	        $qstring = $this->_insertToken($id);
 
 			//send confirmation email with token and link for setting password
-			$url = site_url() . 'main/complete/token/' . $qstring;
+			$url = site_url() . 'Main/complete/token/' . $qstring;
 			$link = '<a href="' . $url . '">' . $url . '</a>'; 
 										
 			$message = '';                     
@@ -600,11 +621,11 @@ class main extends MY_Controller {
 				$this->session->set_flashdata('FCode', $fCode);
 				$this->session->set_flashdata('ProfCityAddr', $cityAddr);
 				$this->session->set_flashdata('msg', "Some of the Personal Information you typed still doesn't match with your current records from the HR. Please double check the details you have typed.");
-				redirect(base_url().'main/register_as_prof.html');
+				redirect(base_url().'Main/register_as_prof.html');
 			}
 		} else {
 			$this->session->set_flashdata('msg', "Username or Password already exists.");
-				redirect(base_url().'main/register_as_prof.html');
+				redirect(base_url().'Main/register_as_prof.html');
 		}  
 	}
 
@@ -677,7 +698,7 @@ class main extends MY_Controller {
 			$qstring = $this->_insertToken($id);
 
 			//send confirmation email with token and link for setting password
-			$url = site_url() . 'main/complete/token/' . $qstring;
+			$url = site_url() . 'Main/complete/token/' . $qstring;
 			$link = '<a href="' . $url . '">' . $url . '</a>'; 
 										
 			$message = '';                     
@@ -699,11 +720,11 @@ class main extends MY_Controller {
 				$this->session->set_flashdata('StudGuardian', $guardianName);
 				$this->session->set_flashdata('StudGuardianMobile', $guardianMobile);
 				$this->session->set_flashdata('msg', "Some of the Personal Information you typed still doesn't match with your current records from the Registrar. Please double check the details you have typed.");
-				redirect(base_url().'main/register_as_student.html');
+				redirect(base_url().'Main/register_as_student.html');
 			}
 		} else {
 			$this->session->set_flashdata('msg', "Username or Password already exists.");
-				redirect(base_url().'main/register_as_student.html');
+				redirect(base_url().'Main/register_as_student.html');
 		}     
 	}
 	/***************************************** END OF ADD STUDENT (CREATE TOKEN) *************************************/
@@ -716,7 +737,7 @@ class main extends MY_Controller {
 		$userInfo = $this->_isTokenValid($cleanToken); //either false or array();    
 
 		if(empty($userInfo)) {
-			redirect(base_url().'main/tokenerror.html');
+			redirect(base_url().'Main/tokenerror.html');
 		}
 
 		$data = array(
@@ -815,11 +836,11 @@ class main extends MY_Controller {
 			
 			if($userInfo[0]->UserTypeID==1)
             {
-              	redirect(base_url().'main/professor_page.html');
+              	redirect(base_url().'Main/professor_page.html');
             }
             if($userInfo[0]->UserTypeID==2)
             {
-              	redirect(base_url().'main/student_page.html');
+              	redirect(base_url().'Main/student_page.html');
             }
 		}
 	}
@@ -836,12 +857,12 @@ class main extends MY_Controller {
 
 		if(empty($getUserInfo)){
 			$this->session->set_flashdata('msg', "We can't seem to find your email address.");
-			redirect(site_url().'main/forgot_password');
+			redirect(site_url().'Main/forgot_password');
 		}   
 	
 		if($getUserInfo[0]->status == 'pending'){ //if status is not approved
 			$this->session->set_flashdata('msg', 'Your account is not yet in confirmed status. Please check your email and confirm.');
-			redirect(site_url().'main/forgot_password');
+			redirect(site_url().'Main/forgot_password');
 		}
 
 		//update db if password request has been made
@@ -867,7 +888,7 @@ class main extends MY_Controller {
 		//build token 
 		$qstring = $this->_insertToken($getUserInfo[0]->UserID);
 
-		$url = site_url() . 'main/resetPassword/token/' . $qstring;
+		$url = site_url() . 'Main/resetPassword/token/' . $qstring;
 		$link = '<a href="' . $url . '">' . $url . '</a>'; 
 			
 		$message = '';                     
@@ -890,7 +911,7 @@ class main extends MY_Controller {
 		$userInfo = $this->_isTokenValid2($cleanToken); //either false or array();    
 		
 		if(empty($userInfo)) {
-			redirect(base_url().'main/token_error.html'); 		
+			redirect(base_url().'Main/token_error.html'); 		
 		}
 		
 		$data = array(
@@ -970,11 +991,11 @@ class main extends MY_Controller {
 
                 if($userInfo[0]->UserTypeID==1)
                 {
-                	redirect(base_url().'main/professor_page.html');
+                	redirect(base_url().'Main/professor_page.html');
                 }
                 if($userInfo[0]->UserTypeID==2)
                 {
-                	redirect(base_url().'main/student_page.html');
+                	redirect(base_url().'Main/student_page.html');
                 }
 		}
 	}
@@ -1041,11 +1062,20 @@ class main extends MY_Controller {
 
 						if($getPassword[0]->UserTypeID == 1)
 						{
-							redirect(base_url().'main/professor_page.html');
+							//Add checker if date is past deadline of encoding final grades.
+							if($getPassword[0]->deadlineTrigger == 1)
+							{
+								$this->session->set_flashdata('msg', 'Access Denied! Deadline of Encoding of Final Grades already done. Please make a request to the registrar if you want to access the system at this moment.');
+								redirect(base_url());
+							}
+							else
+							{
+								redirect(base_url().'Main/professor_page.html');
+							}
 						}
 						if($getPassword[0]->UserTypeID == 2)
 						{	
-							redirect(base_url().'main/student_page.html');
+							redirect(base_url().'Main/student_page.html');
 						}
 						if($getPassword[0]->UserTypeID == 3)
 						{	
@@ -1094,8 +1124,8 @@ class main extends MY_Controller {
 		//Audit Trail
 	    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
 
-		$this->session->unset_userdata($key, $val);
-		$this->session->sess_destroy();
+		@$this->session->unset_userdata($key, $val);
+		@$this->session->sess_destroy();
 		redirect(base_url());
 	}
 
@@ -1114,7 +1144,7 @@ class main extends MY_Controller {
 				$fieldNameLike = null, $like = null, 
 				$whereSpecial = null, $groupBy = null );
 
-			$data['subjects'] = $this->gt_model->getsubjectstaught($this->session->userdata('IDCode'), $getData[0]->SY, $getData[0]->Sem);
+			$data['subjects'] = $this->Gt_model->getsubjectstaught($this->session->userdata('IDCode'), $getData[0]->SY, $getData[0]->Sem);
 			$data['SY'] = $getData[0]->SY;
 			$data['Sem'] = $getData[0]->Sem;
 			
@@ -1144,7 +1174,7 @@ class main extends MY_Controller {
 				$fieldNameLike = null, $like = null, 
 				$whereSpecial = null, $groupBy = null );
 
-			$data['subjects'] = $this->gt_model->getsubjectsenrolled($this->session->userdata('IDCode'), $getData[0]->SY, $getData[0]->Sem);
+			$data['subjects'] = $this->Gt_model->getsubjectsenrolled($this->session->userdata('IDCode'), $getData[0]->SY, $getData[0]->Sem);
 			$data['Sem'] = $getData[0]->Sem;
 
 			header("Access-Control-Allow-Origin: *");
@@ -1181,7 +1211,7 @@ class main extends MY_Controller {
 
 			$SubjCode = $this->uri->segment(3);
 			$SectCode = $this->uri->segment(4);
-			$tblname = $this->gt_model->createtable($SubjCode, $SectCode, $SY, $Sem);
+			$tblname = $this->Gt_model->createtable($SubjCode, $SectCode, $SY, $Sem);
 
 			$getData = $this->_getRecordsData(
 				$data = array('*'),
@@ -1271,7 +1301,7 @@ class main extends MY_Controller {
 				$this->load->view('footer');
 			} else {
 				$this->session->set_flashdata('msg', 'Grades for this subject is still in preparation.');
-				redirect(base_url().'main/student_page.html');
+				redirect(base_url().'Main/student_page.html');
 			}
 		}
 		else
@@ -1567,7 +1597,7 @@ class main extends MY_Controller {
 	     			);
 	    		}
 	   		}
-	   		$check_success = $this->gt_model->customUpdateTable($tblname, $data);
+	   		$check_success = $this->Gt_model->customUpdateTable($tblname, $data);
 	   		echo 'Data Imported Successfully!';
 
 	   		//Audit Trails
@@ -1575,7 +1605,7 @@ class main extends MY_Controller {
 			$audit_trail = array(
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
-				'ActionDone' => 'Updated Midterm Grades for '.$this->uri->segment(3).'.',
+				'ActionDone' => 'Updated Midterm Grades for '.$this->uri->segment(3).' Section: '.$clean_sectcode.' SY: '.$SY.' Sem: '.$Sem.'.',
 				'DateTimeActionMade' => date('Y-m-d H:i:s'),
 				'ip_address' => $this->input->ip_address()
 			);
@@ -1623,7 +1653,7 @@ class main extends MY_Controller {
 	     			);
 	    		}
 	   		}
-	   		$this->gt_model->customUpdateTable($tblname, $data);
+	   		$this->Gt_model->customUpdateTable($tblname, $data);
 	   		echo 'Data Imported Successfully!';
 
 	   		//Audit Trails
@@ -1631,7 +1661,7 @@ class main extends MY_Controller {
 			$audit_trail = array(
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
-				'ActionDone' => 'Updated Pre-Final Grades for '.$this->uri->segment(3).'.',
+				'ActionDone' => 'Updated Pre-Final Grades for '.$this->uri->segment(3).' Section: '.$clean_sectcode.' SY: '.$SY.' Sem: '.$Sem.'.',
 				'DateTimeActionMade' => date('Y-m-d H:i:s'),
 				'ip_address' => $this->input->ip_address()
 			);
@@ -1679,7 +1709,7 @@ class main extends MY_Controller {
 	     			);
 	    		}
 	   		}
-	   		$this->gt_model->customUpdateTable($tblname, $data);
+	   		$this->Gt_model->customUpdateTable($tblname, $data);
 	   		echo 'Data Imported Successfully!';
 
 	   		//Audit Trails
@@ -1687,7 +1717,7 @@ class main extends MY_Controller {
 			$audit_trail = array(
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
-				'ActionDone' => 'Updated Final Grades for '.$this->uri->segment(3).'.',
+				'ActionDone' => 'Updated Final Grades for '.$this->uri->segment(3).' Section: '.$clean_sectcode.' SY: '.$SY.' Sem: '.$Sem.'.',
 				'DateTimeActionMade' => date('Y-m-d H:i:s'),
 				'ip_address' => $this->input->ip_address()
 			);
@@ -1743,7 +1773,7 @@ class main extends MY_Controller {
 	     			);
 	    		}
 	   		}
-	   		$this->gt_model->customUpdateTable($tblname, $data);
+	   		$this->Gt_model->customUpdateTable($tblname, $data);
 	   		echo 'Data Imported Successfully!';
 
 	   		//Audit Trails
@@ -1751,7 +1781,7 @@ class main extends MY_Controller {
 			$audit_trail = array(
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
-				'ActionDone' => 'Updated All Grades for '.$this->uri->segment(3).'.',
+				'ActionDone' => 'Updated All Grades for '.$this->uri->segment(3).' Section: '.$clean_sectcode.' SY: '.$SY.' Sem: '.$Sem.'.',
 				'DateTimeActionMade' => date('Y-m-d H:i:s'),
 				'ip_address' => $this->input->ip_address()
 			);
@@ -1829,7 +1859,7 @@ class main extends MY_Controller {
 			$fieldName = null, $where = null, $join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, $fieldNameLike = null, $like = null, $whereSpecial = null, $groupBy = null );
 		
 		//update tblenrollemnt  with the perc and dec grades from the created sunject table
-		$this->gt_model->customUpdateTable1($this->uri->segment(3), $getDataFromCreatedSubjTbl);
+		$this->Gt_model->customUpdateTable1($this->uri->segment(3), $getDataFromCreatedSubjTbl);
 
 		//Audit Trails
 		$audit_trail = null;
@@ -2032,11 +2062,11 @@ class main extends MY_Controller {
 
                	if($this->session->userdata('UserTypeID')==1)
                 {
-                	redirect(base_url().'main/professor_page.html');
+                	redirect(base_url().'Main/professor_page.html');
                 }
                 if($this->session->userdata('UserTypeID')==2)
                 {
-                	redirect(base_url().'main/student_page.html');
+                	redirect(base_url().'Main/student_page.html');
                 }
             }
 		}
@@ -2106,7 +2136,7 @@ class main extends MY_Controller {
 		{
 			return 0;
 		}
-		redirect(base_url().'main/studentaccount.html');
+		redirect(base_url().'Main/studentaccount.html');
 	}
 /********************************************** END SET PARENT NOTIFICATION ON/OFF ************************************************** */
 
@@ -2162,4 +2192,11 @@ class main extends MY_Controller {
 		}
 	}
 /********************************************** END SEND SMS ************************************************** */
+
+/************************************GET DATE AND TIME******************************************** */
+	public function serverdateandtime()
+	{
+		echo $timestamp = '<b>Server Date:</b> '.date('M. d, Y').' <br><b>Server Time:</b> '.date('h:i:s a');
+	}
+/************************************END GET DATE AND TIME******************************************** */
 }	

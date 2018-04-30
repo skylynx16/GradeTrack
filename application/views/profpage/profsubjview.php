@@ -11,7 +11,7 @@
 		</div>
 		<div class="col-md-5">
 			<p style="text-align:right; vertical-align:middle;" class="animated bounceInRight">
-			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'main/professor_page.html">
+			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'Main/professor_page.html">
 						<i class="fas fa-arrow-circle-left" style="margin-right: 5px;"></i>Go Back</a>'; ?><br><br>
 
 			<?php if($GradingPeriod == 'Finals')
@@ -73,7 +73,7 @@
 		</div>
 		<div class="col-md-6">
 			<p style="text-align:center; vertical-align:middle;">
-				<?php echo '<a class="btnImpExp hvr-grow-shadow" href="'.base_url().'main/export/1/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'">
+				<?php echo '<a class="btnImpExp hvr-grow-shadow" href="'.base_url().'Main/export/1/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'">
 						<i class="fas fa-download" style="margin-right: 5px;"></i>Download Template for Midterm Grades</a>'; ?>
 			</p>
 		</div>
@@ -94,7 +94,7 @@
 		</div>
 		<div class="col-md-6">
 			<p style="text-align:center; vertical-align:middle;">
-				<?php echo '<a class="btnImpExp hvr-grow-shadow" href="'.base_url().'main/export/2/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'">
+				<?php echo '<a class="btnImpExp hvr-grow-shadow" href="'.base_url().'Main/export/2/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'">
 						<i class="fas fa-download" style="margin-right: 5px;"></i>Download Template for Pre-final Grades</a>'; ?>
 			</p>
 		</div>
@@ -115,7 +115,7 @@
 		</div>
 		<div class="col-md-6">
 			<p style="text-align:center; vertical-align:middle;">
-				<?php echo '<a class="btnImpExp hvr-grow-shadow" href="'.base_url().'main/export/3/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'">
+				<?php echo '<a class="btnImpExp hvr-grow-shadow" href="'.base_url().'Main/export/3/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'">
 						<i class="fas fa-download" style="margin-right: 5px;"></i>Download Template for Final Grades</a>'; ?>
 			</p>
 		</div>
@@ -136,7 +136,7 @@
 		</div>
 		<div class="col-md-6">
 			<p style="text-align:center; vertical-align:middle;">
-				<?php echo '<a class="btnImpExp hvr-grow-shadow" href="'.base_url().'main/export/4/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'">
+				<?php echo '<a class="btnImpExp hvr-grow-shadow" href="'.base_url().'Main/export/4/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'">
 						<i class="fas fa-download" style="margin-right: 5px;"></i>Download Whole Template</a>'; ?>
 			</p>
 		</div>
@@ -155,7 +155,7 @@
 	$('#import_form1').on('submit', function(event){
 		event.preventDefault();
 	  	$.ajax({
-	  		url:"<?php echo base_url(); ?>main/import1/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
+	  		url:"<?php echo base_url(); ?>Main/import1/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
 	   		method:"POST",
 	   		data:new FormData(this),
 	   		contentType:false,
@@ -172,7 +172,7 @@
 	$('#import_form2').on('submit', function(event){
 		event.preventDefault();
 	  	$.ajax({
-	  		url:"<?php echo base_url(); ?>main/import2/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
+	  		url:"<?php echo base_url(); ?>Main/import2/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
 	   		method:"POST",
 	   		data:new FormData(this),
 	   		contentType:false,
@@ -189,7 +189,7 @@
 	$('#import_form3').on('submit', function(event){
 		event.preventDefault();
 	  	$.ajax({
-	  		url:"<?php echo base_url(); ?>main/import3/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
+	  		url:"<?php echo base_url(); ?>Main/import3/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
 	   		method:"POST",
 	   		data:new FormData(this),
 	   		contentType:false,
@@ -206,7 +206,7 @@
 	$('#import_form4').on('submit', function(event){
 		event.preventDefault();
 	  	$.ajax({
-	  		url:"<?php echo base_url(); ?>main/import4/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
+	  		url:"<?php echo base_url(); ?>Main/import4/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
 	   		method:"POST",
 	   		data:new FormData(this),
 	   		contentType:false,
@@ -224,7 +224,7 @@
 		if(confirm("Are the final grades complete?"))
 		{
 		  	$.ajax({
-				url:"<?php echo base_url(); ?>main/submitFinalGrade/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
+				url:"<?php echo base_url(); ?>Main/submitFinalGrade/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>/<?php echo $this->uri->segment(6); ?>/<?php echo $this->uri->segment(7); ?>",
 				success:function(data){
 			   		alert('Submission of Final Grades Success!');
 				},

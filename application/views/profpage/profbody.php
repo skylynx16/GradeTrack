@@ -34,7 +34,7 @@
 			<?php
 			    foreach($subjects as $row) :
 			    {
-					echo "<a href='".base_url()."main/createtable/".$row->ESubjCode."/".$row->SectCode."/".str_replace("&"," and ",str_replace("("," - ",str_replace(")","",str_replace("%20", " ",$row->Description))))."/".$SY."/".$Sem."'>";
+					echo "<a href='".base_url()."Main/createtable/".$row->ESubjCode."/".$row->SectCode."/".str_replace("&"," and ",str_replace("("," - ",str_replace(")","",str_replace("%20", " ",$row->Description))))."/".$SY."/".$Sem."'>";
 					echo '<div class="btnSubject animated bounceInUp">';
 					echo $row->ESubjCode." - ".$row->Description." - ".$row->SectCode;
 					echo '</div>';

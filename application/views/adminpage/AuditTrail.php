@@ -5,9 +5,15 @@
 				Audit Trail
 			</p>
 			<div class="search-container animated bounceInLeft">
-				<form action="<?php echo base_url(); ?>admin/searchaudittrail.html" method="POST">
+				<form action="<?php echo base_url(); ?>Admin/searchaudittrail.html" method="POST">
 				Search by:
-					<input type="text" placeholder="Username" name="Username" style="width:20%;"> 
+					<input type="text" placeholder="Username" name="Username" style="width:20%;">
+					<select name="UserType" style="width:20%; height: 30px;">
+						<option value="">Choose User Type</option>
+						<option value="professor">Professor</option>
+					  	<option value="student">Student</option>
+					  	<option value="admin">Admin</option>
+					</select>
 					<input type="text" placeholder="Action Done" name="ActionDone" style="width:20%;">
 					<input type="text" placeholder="Date or Time" name="DateTime" style="width:20%;">
 					<button type="submit" class="btn btn-default btn-info"><i class="fa fa-search"></i></button>
@@ -18,10 +24,10 @@
 
         <div class="col-md-2">
 			<p style="text-align:center; vertical-align:middle;" class="animated bounceInRight">
-			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'admin/adminbody.html">
+			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'Admin/adminbody.html">
 						<i class="fas fa-arrow-circle-left" style="margin-right: 5px;"></i>Go Back</a>'; ?></p>
 			<p style="text-align:center; vertical-align:middle;" class="animated bounceInRight">
-			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'admin/audittrail.html">
+			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'Admin/audittrail.html">
 						Reset Table</a>'; ?></p>
 		</div>
 	</div> <!--row -->

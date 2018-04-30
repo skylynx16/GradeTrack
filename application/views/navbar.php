@@ -9,7 +9,7 @@
         <a class="nav-link" href="<?php echo base_url(); ?>">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>main/register_as.html">Register</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>Main/register_as.html">Register</a>
       </li>
     </ul>
   </div>

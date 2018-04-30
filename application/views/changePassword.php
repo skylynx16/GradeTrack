@@ -16,7 +16,7 @@
 <!--END -------------------------------- Backup Error ----------------------------------------------------------- -->
             <?php 
             $fattr = array('class' => 'form-signin');
-            echo form_open(site_url().'main/changePassword'); ?>
+            echo form_open(site_url().'Main/changePassword'); ?>
             
             <div class="form-group">
                 <?php echo form_password(array('name'=>'oldpassword', 'id'=> 'oldpassword', 'placeholder'=>'Old Password', 'class'=>'form-control', 'value' => set_value('oldpassword'))); ?>

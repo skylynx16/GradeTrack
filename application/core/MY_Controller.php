@@ -13,7 +13,7 @@ class MY_Controller extends CI_Controller {
     //------------------------------------------------GET RECORDS--------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
     function _getRecords($tables, $fieldName, $where, $join, $joinType, $sortBy, $sortOrder, $limit, $fieldNameLike, $like, $whereSpecial) {
-        $rows = $this->gt_model->getRecords($tables, $fieldName, $where, $join, $joinType, $sortBy, $sortOrder, $limit, $fieldNameLike, $like, $whereSpecial);
+        $rows = $this->Gt_model->getRecords($tables, $fieldName, $where, $join, $joinType, $sortBy, $sortOrder, $limit, $fieldNameLike, $like, $whereSpecial);
         return $rows;
     }
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ class MY_Controller extends CI_Controller {
     //------------------------------------------------GET RECORDS--------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
     function _getRecordsData($data, $tables, $fieldName, $where, $join, $joinType, $sortBy, $sortOrder, $limit, $fieldNameLike, $like, $whereSpecial, $groupBy) {
-        $rows = $this->gt_model->getRecordsData($data, $tables, $fieldName, $where, $join, $joinType, $sortBy, $sortOrder, $limit, $fieldNameLike, $like, $whereSpecial, $groupBy);
+        $rows = $this->Gt_model->getRecordsData($data, $tables, $fieldName, $where, $join, $joinType, $sortBy, $sortOrder, $limit, $fieldNameLike, $like, $whereSpecial, $groupBy);
         return $rows;
     }
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ class MY_Controller extends CI_Controller {
     //------------------------------------------------UPDATE RECORDS-----------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
     function _updateRecords($tableName, $fieldName, $where, $data) {
-        $rows = $this->gt_model->updateRecords($tableName, $fieldName, $where, $data);
+        $rows = $this->Gt_model->updateRecords($tableName, $fieldName, $where, $data);
         return $rows;
     }
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ class MY_Controller extends CI_Controller {
     //------------------------------------------------INSERT RECORDS-----------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
     function _insertRecords($tableName, $data) {
-        $rows = $this->gt_model->insertRecords($tableName, $data);
+        $rows = $this->Gt_model->insertRecords($tableName, $data);
         return $rows;
     }
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ class MY_Controller extends CI_Controller {
     //------------------------------------------------UPDATE RECORDS-----------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
     function _deleteRecords($tableName, $fieldName, $where) {
-        $rows = $this->gt_model->deleteRecords($tableName, $fieldName, $where);
+        $rows = $this->Gt_model->deleteRecords($tableName, $fieldName, $where);
         return $rows;
     }
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ class MY_Controller extends CI_Controller {
               'userID' => $id,
               'timeStamp' => $date,
         ); 
-        $this->gt_model->insertRecords($tableName = 'tbltokens', $data_token);
+        $this->Gt_model->insertRecords($tableName = 'tbltokens', $data_token);
         $token = $token . $id;
         $qstring = $this->_base64urlEncode($token);                      
         return $qstring;
@@ -242,7 +242,7 @@ class MY_Controller extends CI_Controller {
        $tkn = substr($token,0,30);
        $uid = substr($token,30);      
        
-       $result = $this->gt_model->getRecordsData($data = array('*'), 
+       $result = $this->Gt_model->getRecordsData($data = array('*'), 
             $tables = array('tbltokens'), 
             $fieldName = array('token', 'UserID'), 
             $where = array($tkn, $uid), 
@@ -250,7 +250,7 @@ class MY_Controller extends CI_Controller {
             $fieldNameLike = null, $like = null, 
             $whereSpecial = null, $groupBy = null );
 
-       $status = $this->gt_model->getRecordsData($data = array('*'), 
+       $status = $this->Gt_model->getRecordsData($data = array('*'), 
             $tables = array('tblusers'), 
             $fieldName = array('UserID'), 
             $where = array($uid), 
@@ -307,7 +307,7 @@ class MY_Controller extends CI_Controller {
        $tkn = substr($token,0,30);
        $uid = substr($token,30);      
        
-       $result = $this->gt_model->getRecordsData($data = array('*'), 
+       $result = $this->Gt_model->getRecordsData($data = array('*'), 
             $tables = array('tbltokens'), 
             $fieldName = array('token', 'UserID'), 
             $where = array($tkn, $uid), 
@@ -315,7 +315,7 @@ class MY_Controller extends CI_Controller {
             $fieldNameLike = null, $like = null, 
             $whereSpecial = null, $groupBy = null );
 
-       $passresetreq = $this->gt_model->getRecordsData($data = array('*'), 
+       $passresetreq = $this->Gt_model->getRecordsData($data = array('*'), 
             $tables = array('tblusers'), 
             $fieldName = array('UserID'), 
             $where = array($uid), 

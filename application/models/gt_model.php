@@ -1,6 +1,6 @@
 <?php
 
-class gt_model extends CI_Model
+class Gt_model extends CI_Model
 {
 	//--------------------------------------------------------------------------------------------------------------------------------------
     //GET RECORDS BY GENERIC ACCESS VERSION1

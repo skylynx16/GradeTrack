@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-9">
 			<p style="font-family: 'Century Gothic'; font-size: 3rem; vertical-align: middle;" class="animated bounceInLeft">
-				Set School Year, Semester, and Grading Period
+				Set Deadline for Encoding of Final Grades and Toggle System Accessibility for Professors
 			</p>
         </div>
         <div class="col-md-3">
@@ -13,46 +13,30 @@
     </div><!-- row -->
     <br>
 
-    <form id="setsysemgp" action="<?php echo base_url(); ?>Admin/setsysemgp" method="POST" class="animated bounceInRight">
+    <form id="setsysemgp" action="<?php echo base_url(); ?>Admin/setdeadline" method="POST" class="animated bounceInRight">
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form-group">
-                <b>Set School Year</b><br>
-                <input style="width: 100%;" type="text" id="schoolYear" name="schoolYear" value="<?php echo $SY; ?>">
+                <b>Set Deadline of Encoding of Final Grades</b><br>
+                <input style="width: 50%;border: solid gray 1px;" type="date" id="deadlineDate" name="deadlineDate" required>
                 <?php echo "<div class='message' style= 'color:red; font-size:0.8rem; font-family: Arial, Helvetica, sans-serif; text-align:center; margin-top:0.5rem;'>"; ?>
-                <?php echo form_error('schoolYear') ?>
                 <?php echo "</div>";?>
             </div>
         </div>
             
-        <div class="col-md-3">
-            <div class="form-group">
-                <b>Set Semester</b><br>
-                <select style="width: 100%;" id="semester" name="semester">
-                    <option value="A" <?php if($Sem == 'A') echo 'selected'; ?>>A</option>
-                    <option value="B" <?php if($Sem == 'B') echo 'selected'; ?>>B</option>
-                    <option value="C" <?php if($Sem == 'C') echo 'selected'; ?>>C</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="form-group">
-                <b>Set Grading Period</b><br>
-                <select style="width: 100%;" id="gradingperiod" name="gradingperiod">
-                    <option value="Midterms" <?php if($GradingPeriod == 'Midterms') echo 'selected'; ?>>Midterms</option>
-                    <option value="Pre-Finals" <?php if($GradingPeriod == 'Pre-Finals') echo 'selected'; ?>>Pre-Finals</option>
-                    <option value="Finals" <?php if($GradingPeriod == 'Finals') echo 'selected'; ?>>Finals</option>
-                </select>
-            </div>
-        </div>
         <div class="col-md-1">
             <div class="form-group">
                 <button type="submit" class="btn btn-default btn-info" style="width: 100%; margin-top: 1rem;">Set</button>
             </div>
         </div>
         <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'Admin/enableprofaccounts">
+                        Manually Unlock Professor Accounts</a>'; ?><br><br>
+            <?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'Admin/disableprofaccounts">
+                        Lock Professor Accounts</a>'; ?>
+        </div>
     </div>
     </form>  
 <br><br>
@@ -64,17 +48,21 @@
 
                 <table class="table table-bordered animated flipInX" id="setSySem">
                         <tr id="user_tbl_head" class="setSySem">
-                            <td id="user_tbl_data">School Year</td>
+                            <td id="user_tbl_data">Deadline Date</td>
                             <td id="user_tbl_data">Semester</td>
-                            <td id="user_tbl_data">Grading Period</td>
-                            <td id="user_tbl_data">Last Updated</td>
+                            <td id="user_tbl_data">School Year</td>
+                            <td id="user_tbl_data">Date and Time Set</td>
+                            <td id="user_tbl_data">Professor Accounts Disabled</td>
+                            <td id="user_tbl_data">Manual Override</td>
                         </tr>
                     <?php if(isset($wholetable)) : foreach($wholetable as $row) : ?>
                         <tr id="user_tbl_content" class="setSySem">
-                            <td id="user_tbl_data"><?php echo $row->SY; ?></td>
+                            <td id="user_tbl_data"><?php echo $row->deadlineDate; ?></td>
                             <td id="user_tbl_data"><?php echo $row->Sem; ?></td>
-                            <td id="user_tbl_data"><?php echo $row->GradingPeriod; ?></td>
-                            <td id="user_tbl_data"><?php echo $row->datetime_updated; ?></td>
+                            <td id="user_tbl_data"><?php echo $row->SY; ?></td>
+                            <td id="user_tbl_data"><?php echo $row->datetimeSet; ?></td>
+                            <td id="user_tbl_data"><?php if($row->ProfAccountsDisabled == 0){echo 'No';}else{echo 'Yes';} ?></td>
+                            <td id="user_tbl_data"><?php if($row->manualOverride == 0){echo 'No';}else{echo 'Yes';} ?></td>
                         </tr>
                     <?php endforeach; ?> 
                     <?php endif; ?>                   

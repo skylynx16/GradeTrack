@@ -19,7 +19,7 @@
             <div class="form-complete">
               <?php 
                 $fattr = array('class' => 'form-signin');
-                echo form_open(site_url().'main/complete/token/'.$token, $fattr); ?>
+                echo form_open(site_url().'Main/complete/token/'.$token, $fattr); ?>
 
                 <div class="form-group">
                   <?php echo form_password(array('name'=>'password', 'id'=> 'password', 'placeholder'=>'Password', 'class'=>'form-control', 'value' => set_value('password'))); ?>

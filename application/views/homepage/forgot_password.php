@@ -16,7 +16,7 @@
 ?>
 <!--END -------------------------------- Backup Error ----------------------------------------------------------- -->
 
-            <?php $fattr = array('class' => 'form-signin'); echo form_open(site_url().'main/forgotPassword/', $fattr); ?>
+            <?php $fattr = array('class' => 'form-signin'); echo form_open(site_url().'Main/forgotPassword/', $fattr); ?>
                 <div class="form-group">
                     <div class="input-group">
                         <input name="emailAddress" value="" data-validation="email" id="emailAddress" placeholder='Email Address' class='form-control'  data-validation-error-msg="Please enter a valid Email Address." data-validation-error-msg-container="#messageValidationLocationEmail" onBlur="" onFocus="" >

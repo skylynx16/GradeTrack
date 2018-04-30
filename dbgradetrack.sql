@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2018 at 06:20 PM
+-- Generation Time: Apr 30, 2018 at 03:40 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.34
 
@@ -50,14 +50,28 @@ CREATE TABLE `tblaudittrail` (
   `ip_address` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `tblaudittrail`
+-- Table structure for table `tbldeadlines`
 --
 
-INSERT INTO `tblaudittrail` (`ID`, `Username`, `UserType`, `ActionDone`, `DateTimeActionMade`, `ip_address`) VALUES
-(1, 'gradetrackadmin', 3, 'Logged In.', '2018-04-21 00:18:33', '::1'),
-(2, 'gradetrackadmin', 3, 'Updated SY, Sem, or Grading Period.', '2018-04-21 00:18:57', '::1'),
-(3, 'gradetrackadmin', 3, 'Logged Out.', '2018-04-21 00:18:59', '::1');
+CREATE TABLE `tbldeadlines` (
+  `ID` int(11) NOT NULL,
+  `deadlineDate` date DEFAULT NULL,
+  `Sem` char(1) NOT NULL,
+  `SY` int(11) NOT NULL,
+  `datetimeSet` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ProfAccountsDisabled` int(1) NOT NULL DEFAULT '0',
+  `manualOverride` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbldeadlines`
+--
+
+INSERT INTO `tbldeadlines` (`ID`, `deadlineDate`, `Sem`, `SY`, `datetimeSet`, `ProfAccountsDisabled`, `manualOverride`) VALUES
+(1, NULL, '', 0, '2018-04-30 01:39:22', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -155,7 +169,7 @@ INSERT INTO `tblpaymentstrail` (`StudNo`, `SY`, `Sem`, `Balance`) VALUES
 ('2000300001', '1718', 'A', 0),
 ('2000300002', '1718', 'A', 0),
 ('2001300414', '1718', 'A', 0),
-('2013300322', '1718', 'A', 100),
+('2013300322', '1718', 'A', 0),
 ('2014300323', '1718', 'A', 0),
 ('2014301168', '1718', 'A', 0);
 
@@ -212,7 +226,9 @@ CREATE TABLE `tblsetsysemgp` (
 --
 
 INSERT INTO `tblsetsysemgp` (`ID`, `SY`, `Sem`, `GradingPeriod`, `datetime_updated`, `prevSem`) VALUES
-(1, '1718', 'A', 'Midterms', '2018-04-21 00:18:57', NULL);
+(1, '1718', 'A', 'Midterms', '2018-04-21 00:18:57', NULL),
+(2, '1718', 'A', 'Finals', '2018-04-21 11:43:48', 'A'),
+(3, '1718', 'A', 'Midterms', '2018-04-21 11:53:35', 'A');
 
 -- --------------------------------------------------------
 
@@ -345,20 +361,21 @@ CREATE TABLE `tblusers` (
   `isloggedin` int(1) NOT NULL DEFAULT '0',
   `parentNotif` int(1) NOT NULL DEFAULT '0',
   `parentNotifIsSet` int(1) NOT NULL DEFAULT '0',
-  `profilePic` varchar(255) DEFAULT NULL
+  `profilePic` varchar(255) DEFAULT NULL,
+  `deadlineTrigger` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblusers`
 --
 
-INSERT INTO `tblusers` (`UserID`, `Username`, `Email`, `Password`, `UserTypeID`, `lastlogin`, `status`, `IDCode`, `LName`, `FName`, `MName`, `isactive`, `passresetreq`, `isloggedin`, `parentNotif`, `parentNotifIsSet`, `profilePic`) VALUES
-(1, 'gradetrackadmin', 'gradetrack.official@gmail.com', 'e480dd6f0fb0590ad3fd32c0bfd55077ae2f2146984f14115199338dd88d87f4fb83194cc5699d3a7145742f9c02f326162455b1744a394cd4046ef07d286559U1XH9eCxeh85/7/LQzuLIqNrZXMRQK20cMeIY0n47YQ=', '3', '2018-04-21 00:18:33', 'confirmed', NULL, 'Admin', 'Grade', 'Track', 1, NULL, 0, 0, 0, NULL),
-(2, 'skylynx', 'afrobles@tua.edu.ph', 'e6f11531f06f6eba56247a40c88a8a12517a654422b44f4639aa678351219c0acfb80a70f4670d7db8848743cfe17b61f3e63c64d7e75985b31823f9eb62d7bdRETHnJabRzfmlaRrvy6syrvfSsoGZDQL4YcGyUSh1HU=', '1', '2018-04-21 00:11:49', 'confirmed', '12-000-000', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
-(3, 'lopez01', 'lopez01@gmail.com', '7930e7c4517d706bd6ba67aa72ed1879a5f59e43758b9cbe82ddeb5e9ab483e61e46512c2f14f843e5a30947c6d246538238d818388c08d9c641b6c196b8e1b35sJ1C+HyV6nRV0ld1xZiHEifiFUbTS+uLi2ZKqGsx8I=', '1', '2018-04-13 06:03:37', 'confirmed', '12-000-001', 'Lopez', 'Mirriam', 'Mendoza', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png'),
-(4, 'perez01', 'perez01@yahoo.com', 'fc8a9a9605a6d0e0d3275357527eaa7e313fb30b2b01c1a8d85c62f8d1e7217413cbbd081399bc843d49f8a1c664e1596e903d3a47764c1aff2515c272135526IJyX2x3YONJKwssPt+Gl2uTWtgcOqRjzL7FRbo5kf+8=', '1', '2018-04-13 06:04:07', 'confirmed', '12-000-002', 'Perez', 'Jamie', 'Bermudez', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png'),
-(5, 'skylynx16', 'andreurobles1416@gmail.com', 'dc89dd6d5d989837540a2466ad1af3820d0baefc9d51c96fa73526d53e73e46b88952479bbded85e3ae1a727f47933236c181d5caf375a3be33c8e3b8b4e175fq6G8lyUpfkahtJK9jiMbw/g4oHaCXhPbRyOtpzhTGqA=', '2', '2018-04-21 00:11:18', 'confirmed', '2013300322', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png'),
-(6, 'nadinejuliano', 'bernadinejuliano@gmail.com', '270f84c2d588043893945340a9b6f7b551e403ff6990ddfbfbd91ff290a0b7ae0169ea06a9f6dde93085ec0b4ffe4f4ffb2f8079b974d6921b2ac7aa6d7e63ceAd/lEo07emA6oWfG10pzD2REk9AQU71eMpu2ty56lNk=', '1', '2018-04-11 08:41:56', 'confirmed', '12-000-006', 'Juliano', 'Bernadine', 'Boncay', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png');
+INSERT INTO `tblusers` (`UserID`, `Username`, `Email`, `Password`, `UserTypeID`, `lastlogin`, `status`, `IDCode`, `LName`, `FName`, `MName`, `isactive`, `passresetreq`, `isloggedin`, `parentNotif`, `parentNotifIsSet`, `profilePic`, `deadlineTrigger`) VALUES
+(1, 'gradetrackadmin', 'gradetrack.official@gmail.com', 'e480dd6f0fb0590ad3fd32c0bfd55077ae2f2146984f14115199338dd88d87f4fb83194cc5699d3a7145742f9c02f326162455b1744a394cd4046ef07d286559U1XH9eCxeh85/7/LQzuLIqNrZXMRQK20cMeIY0n47YQ=', '3', '2018-04-30 08:52:52', 'confirmed', NULL, 'Admin', 'Grade', 'Track', 1, NULL, 0, 0, 0, NULL, 0),
+(2, 'skylynx', 'afrobles@tua.edu.ph', 'e6f11531f06f6eba56247a40c88a8a12517a654422b44f4639aa678351219c0acfb80a70f4670d7db8848743cfe17b61f3e63c64d7e75985b31823f9eb62d7bdRETHnJabRzfmlaRrvy6syrvfSsoGZDQL4YcGyUSh1HU=', '1', '2018-04-30 08:51:21', 'confirmed', '12-000-000', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png', 0),
+(3, 'lopez01', 'lopez01@gmail.com', '7930e7c4517d706bd6ba67aa72ed1879a5f59e43758b9cbe82ddeb5e9ab483e61e46512c2f14f843e5a30947c6d246538238d818388c08d9c641b6c196b8e1b35sJ1C+HyV6nRV0ld1xZiHEifiFUbTS+uLi2ZKqGsx8I=', '1', '2018-04-13 06:03:37', 'confirmed', '12-000-001', 'Lopez', 'Mirriam', 'Mendoza', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png', 0),
+(4, 'perez01', 'perez01@yahoo.com', 'fc8a9a9605a6d0e0d3275357527eaa7e313fb30b2b01c1a8d85c62f8d1e7217413cbbd081399bc843d49f8a1c664e1596e903d3a47764c1aff2515c272135526IJyX2x3YONJKwssPt+Gl2uTWtgcOqRjzL7FRbo5kf+8=', '1', '2018-04-13 06:04:07', 'confirmed', '12-000-002', 'Perez', 'Jamie', 'Bermudez', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png', 0),
+(5, 'skylynx16', 'andreurobles1416@gmail.com', 'dc89dd6d5d989837540a2466ad1af3820d0baefc9d51c96fa73526d53e73e46b88952479bbded85e3ae1a727f47933236c181d5caf375a3be33c8e3b8b4e175fq6G8lyUpfkahtJK9jiMbw/g4oHaCXhPbRyOtpzhTGqA=', '2', '2018-04-30 08:21:08', 'confirmed', '2013300322', 'Robles', 'Andreu Vinzent', 'Florendo', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicmale.png', 0),
+(6, 'nadinejuliano', 'bernadinejuliano@gmail.com', '270f84c2d588043893945340a9b6f7b551e403ff6990ddfbfbd91ff290a0b7ae0169ea06a9f6dde93085ec0b4ffe4f4ffb2f8079b974d6921b2ac7aa6d7e63ceAd/lEo07emA6oWfG10pzD2REk9AQU71eMpu2ty56lNk=', '1', '2018-04-11 08:41:56', 'confirmed', '12-000-006', 'Juliano', 'Bernadine', 'Boncay', 1, NULL, 0, 0, 0, 'resources/images/profilepic/userprofilepicfemale.png', 0);
 
 -- --------------------------------------------------------
 
@@ -395,6 +412,12 @@ ALTER TABLE `ci_sessions`
 -- Indexes for table `tblaudittrail`
 --
 ALTER TABLE `tblaudittrail`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `tbldeadlines`
+--
+ALTER TABLE `tbldeadlines`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -471,7 +494,13 @@ ALTER TABLE `tblusertypes`
 -- AUTO_INCREMENT for table `tblaudittrail`
 --
 ALTER TABLE `tblaudittrail`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbldeadlines`
+--
+ALTER TABLE `tbldeadlines`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblenrollment`
@@ -483,7 +512,7 @@ ALTER TABLE `tblenrollment`
 -- AUTO_INCREMENT for table `tblsetsysemgp`
 --
 ALTER TABLE `tblsetsysemgp`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbltokens`

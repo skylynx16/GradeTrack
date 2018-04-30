@@ -19,7 +19,7 @@
 <div class="animated fadeIn">
 <?php 
    $attributes = array('method' => 'POST', 'role' => 'form', 'id' => 'addstudent' );
-   echo form_open_multipart('/main/addstudent', $attributes);
+   echo form_open_multipart('/Main/addstudent', $attributes);
 
 ?>
 
@@ -215,7 +215,7 @@
 		<div class="form-check">
 			<label class="form-check-label" for="invalidCheck">
 			<input class="form-check-input" type="checkbox" name="TermsOfUse" id="invalidCheck" required>
-			I agree to the <a href="<?php echo base_url(); ?>main/termsandconditions.html" target="_blank"> terms and conditions</a> of this website.
+			I agree to the <a href="<?php echo base_url(); ?>Main/termsandconditions.html" target="_blank"> terms and conditions</a> of this website.
 			</label>
 		</div>
 	</div>
@@ -253,7 +253,7 @@
     $("#iconLoader").show();
 
     jQuery.ajax({
-      url: "../main/checkStudUserName",
+      url: "../Main/checkStudUserName",
       data: 'StudUsername='+$("#StudUsername").val(),
       type: "POST",
       success:function(data){
@@ -283,7 +283,7 @@
     $("#iconLoader1").show();
 
     jQuery.ajax({
-      url: "../main/checkStudEmail",
+      url: "../Main/checkStudEmail",
       data: 'StudEmail='+$("#StudEmail").val(),
       type: "POST",
       success:function(data){
@@ -313,7 +313,7 @@
     $("#iconLoader2").show();
 
     jQuery.ajax({
-      url: "../main/checkStudNo",
+      url: "../Main/checkStudNo",
       data: 'StudNo='+$("#StudNo").val(),
       type: "POST",
       success:function(data){
@@ -343,7 +343,7 @@
     $("#iconLoader3").show();
 
     jQuery.ajax({
-      url: "../main/checkStudFName",
+      url: "../Main/checkStudFName",
       data: 'StudNo='+$("#StudNo").val()+'&StudFName='+$("#StudFName").val(),
       type: "POST",
       success:function(data){
@@ -373,7 +373,7 @@
     $("#iconLoader4").show();
 
     jQuery.ajax({
-      url: "../main/checkStudMName",
+      url: "../Main/checkStudMName",
       data: 'StudNo='+$("#StudNo").val()+'&StudMName='+$("#StudMName").val(),
       type: "POST",
       success:function(data){
@@ -403,7 +403,7 @@
     $("#iconLoader5").show();
 
     jQuery.ajax({
-      url: "../main/checkStudLName",
+      url: "../Main/checkStudLName",
       data: 'StudNo='+$("#StudNo").val()+'&StudLName='+$("#StudLName").val(),
       type: "POST",
       success:function(data){
@@ -433,7 +433,7 @@
     $("#iconLoader6").show();
 
     jQuery.ajax({
-      url: "../main/checkStudBDate",
+      url: "../Main/checkStudBDate",
       data: 'StudNo='+$("#StudNo").val()+'&StudBDate='+$("#StudBDate").val(),
       type: "POST",
       success:function(data){
@@ -463,7 +463,7 @@
     $("#iconLoader7").show();
 
     jQuery.ajax({
-      url: "../main/checkStudMobile",
+      url: "../Main/checkStudMobile",
       data: 'StudNo='+$("#StudNo").val()+'&StudMobile='+$("#StudMobile").val(),
       type: "POST",
       success:function(data){
@@ -493,7 +493,7 @@
     $("#iconLoader8").show();
 
     jQuery.ajax({
-      url: "../main/checkStudCityAddr",
+      url: "../Main/checkStudCityAddr",
       data: 'StudNo='+$("#StudNo").val()+'&StudCityAddr='+$("#StudCityAddr").val(),
       type: "POST",
       success:function(data){
@@ -523,7 +523,7 @@
     $("#iconLoader9").show();
 
     jQuery.ajax({
-      url: "../main/checkStudGuardian",
+      url: "../Main/checkStudGuardian",
       data: 'StudNo='+$("#StudNo").val()+'&StudGuardian='+$("#StudGuardian").val(),
       type: "POST",
       success:function(data){
@@ -553,7 +553,7 @@
     $("#iconLoader10").show();
 
     jQuery.ajax({
-      url: "../main/checkStudGuardianMobile",
+      url: "../Main/checkStudGuardianMobile",
       data: 'StudNo='+$("#StudNo").val()+'&StudGuardianMobile='+$("#StudGuardianMobile").val(),
       type: "POST",
       success:function(data){

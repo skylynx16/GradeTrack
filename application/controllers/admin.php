@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class admin extends MY_Controller {
+class Admin extends MY_Controller {
 	function __construct() {
 		parent::__construct();
 		date_default_timezone_set('Asia/Manila');
@@ -93,28 +93,28 @@ class admin extends MY_Controller {
 						if($getPassword[0]->UserTypeID == 1)
 						{
 							$this->session->set_flashdata('msg', 'UNAUTHORIZED ACCESS. YOU ARE NOT ALLOWED HERE.');
-							redirect(base_url().'admin');
+							redirect(base_url().'Admin');
 						}
 						if($getPassword[0]->UserTypeID == 2)
 						{	
 							$this->session->set_flashdata('msg', 'UNAUTHORIZED ACCESS. YOU ARE NOT ALLOWED HERE.');
-							redirect(base_url().'admin');
+							redirect(base_url().'Admin');
 						}
 						if($getPassword[0]->UserTypeID == 3)
 						{	
-							redirect(base_url().'admin/adminbody.html');
+							redirect(base_url().'Admin/adminbody.html');
 						}
 					}
 					else
 					{
 						$this->session->set_flashdata('msg', 'Wrong Password.');
-						redirect(base_url().'admin');
+						redirect(base_url().'Admin');
 					}
 				} 
 				else
 				{
 					$this->session->set_flashdata('msg', 'Wrong Username.');
-					redirect(base_url().'admin');
+					redirect(base_url().'Admin');
 				}
 			}
 		}
@@ -141,7 +141,7 @@ class admin extends MY_Controller {
 		}
 		else
 		{
-			redirect(base_url().'/admin');
+			redirect(base_url().'Admin');
 		}
 
 	}
@@ -168,9 +168,9 @@ class admin extends MY_Controller {
 		//Audit Trail
 		$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
 
-		$this->session->unset_userdata($key, $val);
-		$this->session->sess_destroy();
-		redirect(base_url().'admin');
+		@$this->session->unset_userdata($key, $val);
+		@$this->session->sess_destroy();
+		redirect(base_url().'Admin');
 	}
 
 	/************************************END LOGOUT ******************************************** */
@@ -191,7 +191,7 @@ class admin extends MY_Controller {
 		
 		$this->load->dbutil();
 		$db_format = array('format'=>'zip','filename'=>'dbgradetrack_backup.sql');
-		$backup =& $this->dbutil->backup($db_format);
+		$backup = $this->dbutil->backup($db_format);
 		$dbname = 'backup-on-' .date('Y-m-d'). ' .zip';
 		$save = 'resources/db_backup/'. $dbname;
 		write_file($save,$backup);
@@ -232,7 +232,7 @@ class admin extends MY_Controller {
 			$numOfLoggedIn = count($getNumberOfOnlineUsers);
 
 			header("Access-Control-Allow-Origin: *");
-			$title['title'] = "Admin";
+			$title['title'] = "Users";
 
 			$data['tblusers'] = $getWholeTable;
 			$data['noOfActiveUsers'] = $numOfActive;
@@ -245,7 +245,7 @@ class admin extends MY_Controller {
 		}
 		else
 		{
-			redirect(base_url().'admin');
+			redirect(base_url().'Admin');
 		}	
 	}
 	/************************************END SHOW USERS DETAILS ******************************************** */
@@ -264,7 +264,7 @@ class admin extends MY_Controller {
 				$whereSpecial = null, $groupBy = null );
 
 			header("Access-Control-Allow-Origin: *");
-			$title['title'] = "Admin";
+			$title['title'] = "Audit Trail";
 
 			$data['tblaudittrail'] = $getWholeTable;
 
@@ -275,7 +275,7 @@ class admin extends MY_Controller {
 		}
 		else
 		{
-			redirect(base_url().'admin');
+			redirect(base_url().'Admin');
 		}	
 		
 	}
@@ -300,7 +300,7 @@ class admin extends MY_Controller {
 			$data['wholetable'] = @$getData;
 
 			header("Access-Control-Allow-Origin: *");
-			$title['title'] = "Admin";
+			$title['title'] = "Set School Year, Semester, and Grading Period";
 		
 			$this->load->view('header', $title);
 			$this->load->view('adminpage/adminnavbar');
@@ -309,7 +309,7 @@ class admin extends MY_Controller {
 		}
 		else
 		{
-			redirect(base_url().'admin');
+			redirect(base_url().'Admin');
 		}
 	}
 
@@ -431,8 +431,23 @@ class admin extends MY_Controller {
 	public function searchaudittrail()
 	{
 		$Username = $this->input->post('Username');
+		$UserType = $this->input->post('UserType');
 		$ActionDone = $this->input->post('ActionDone');
 		$DateTime = $this->input->post('DateTime');
+		$numberUserType = null;
+
+		if(strtolower($UserType) == 'professor')
+		{
+			$numberUserType = 1;
+		}
+		if(strtolower($UserType) == 'student')
+		{
+			$numberUserType = 2;	
+		}
+		if(strtolower($UserType) == 'admin')
+		{
+			$numberUserType = 3;
+		}
 
 		$clean = $this->security->xss_clean($this->input->post(NULL, TRUE));
 
@@ -441,12 +456,12 @@ class admin extends MY_Controller {
 			$fieldName = null,
 			$where = null,
 			$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
-			$fieldNameLike = array('Username','ActionDone','DateTimeActionMade'),
-			$like = array($clean['Username'],$clean['ActionDone'],$clean['DateTime']), 
+			$fieldNameLike = array('Username','UserType','ActionDone','DateTimeActionMade'),
+			$like = array($clean['Username'],$numberUserType,$clean['ActionDone'],$clean['DateTime']), 
 			$whereSpecial = null, $groupBy = null );
 
 		header("Access-Control-Allow-Origin: *");
-		$title['title'] = "Admin";
+		$title['title'] = "Audit Trail";
 
 		$data['tblaudittrail'] = $getSearch;
 
@@ -456,4 +471,146 @@ class admin extends MY_Controller {
 		$this->load->view('footer');
 	}
 	/************************************END SEARCH AUDIT TRAIL******************************************** */
+
+	/************************************GET DATE AND TIME******************************************** */
+	public function serverdateandtime()
+	{
+		echo $timestamp = 'Server Date: '.date('M. d, Y').'<br>Server Time: '.date('H:i:s').'<br>Server Timezone: '.date('e');
+	}
+	/************************************END GET DATE AND TIME******************************************** */
+
+	/************************************SETTING DEADLINE******************************************** */
+	public function showdeadline()
+	{
+		$getData = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tbldeadlines'), 
+				$fieldName = null,
+				$where = null,
+				$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = array('10','0'), 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		header("Access-Control-Allow-Origin: *");
+		$title['title'] = "Set Deadline and Toggle System Accessibility";
+
+		$data['wholetable'] = $getData;
+
+		$this->load->view('header', $title);
+		$this->load->view('adminpage/adminnavbar');
+		$this->load->view('adminpage/SetDeadlineEnableDisableSys', $data);
+		$this->load->view('footer');
+	}
+
+	public function setdeadline()
+	{
+		$getData = $this->_getRecordsData($data = array('*'), 
+			$tables = array('tblsetsysemgp'), 
+			$fieldName = null,
+			$where = null,
+			$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
+			$fieldNameLike = null, $like = null, 
+			$whereSpecial = null, $groupBy = null );
+
+		//insert records into database
+		$data = null;
+		$data = array(
+			'deadlineDate' => $this->input->post('deadlineDate'),
+			'Sem' => $getData[0]->Sem,
+			'SY' => $getData[0]->SY,
+			'datetimeSet' => date('Y-m-d H:i:s')
+		);
+		$id = $this->_insertRecords($tableName = 'tbldeadlines', $data);
+
+		//Audit Trails
+		$audit_trail = null;
+		$audit_trail = array(
+			'Username' => $this->session->userdata('Username'),
+			'UserType' => $this->session->userdata('UserTypeID'),
+			'ActionDone' => 'Set Deadline ('.$this->input->post('deadlineDate').') for Encoding of Final Grades in SY: '.$getData[0]->SY.' Sem: '.$getData[0]->Sem.'.',
+			'DateTimeActionMade' => date('Y-m-d H:i:s'),
+			'ip_address' => $this->input->ip_address()
+		);
+		//Audit Trail
+		$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+
+		//unlock system for professors
+		$tblusersUpdate = array(
+			'deadlineTrigger' => 0
+		);
+
+		$recordUpdated = $this->_updateRecords($tableName = 'tblusers', $fieldName = array('UserTypeID'), $where = array(1), $tblusersUpdate);
+
+		$this->showdeadline();
+	}
+	/************************************END SETTING DEADLINE******************************************** */
+
+	/******************************CUSTOM DISABLE/ENABLE OF PROF ACCOUNTS(FOR SPECIAL CASES)************************************* */
+	public function enableprofaccounts()
+	{
+		$tblusersUpdate = array(
+				'deadlineTrigger' => 0
+			);
+
+		$recordUpdated = $this->_updateRecords($tableName = 'tblusers', $fieldName = array('UserTypeID'), $where = array(1), $tblusersUpdate);
+
+		$getData = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tbldeadlines'), 
+				$fieldName = null,
+				$where = null,
+				$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		$tbldeadlinesUpdate = array(
+				'manualOverride' => 1
+			);
+
+		$recordUpdated2 = $this->_updateRecords($tableName = 'tbldeadlines', $fieldName = array('ID'), $where = array($getData[0]->ID), $tbldeadlinesUpdate);
+
+		//Audit Trails
+		$audit_trail = null;
+		$audit_trail = array(
+			'Username' => $this->session->userdata('Username'),
+			'UserType' => $this->session->userdata('UserTypeID'),
+			'ActionDone' => 'Enabled Professor Accounts.',
+			'DateTimeActionMade' => date('Y-m-d H:i:s'),
+			'ip_address' => $this->input->ip_address()
+		);
+		//Audit Trail
+		$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+
+		$this->showdeadline();
+	}
+
+	public function disableprofaccounts()
+	{
+		$getData = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tbldeadlines'), 
+				$fieldName = null,
+				$where = null,
+				$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		$tbldeadlinesUpdate = array(
+				'manualOverride' => 0
+			);
+
+		$recordUpdated = $this->_updateRecords($tableName = 'tbldeadlines', $fieldName = array('ID'), $where = array($getData[0]->ID), $tbldeadlinesUpdate);
+
+		//Audit Trails
+		$audit_trail = null;
+		$audit_trail = array(
+			'Username' => $this->session->userdata('Username'),
+			'UserType' => $this->session->userdata('UserTypeID'),
+			'ActionDone' => 'Disabled Professor Accounts.',
+			'DateTimeActionMade' => date('Y-m-d H:i:s'),
+			'ip_address' => $this->input->ip_address()
+		);
+		//Audit Trail
+		$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+
+		$this->showdeadline();
+	}
+	/******************************END CUSTOM DISABLE/ENABLE OF PROF ACCOUNTS(FOR SPECIAL CASES)************************************* */
 }

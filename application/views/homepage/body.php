@@ -7,7 +7,7 @@
 				Sciences first grade tracking tool. Made for convenient storing and viewing of grades.</p>
 				
 				<p style="font-size: 2rem; font-weight: bold;">Don't have an account?</p>
-				<a class="btn btn-default btnRegister" href="<?php echo base_url(); ?>main/register_as.html" role="button">Register Now!</a>
+				<a class="btn btn-default btnRegister" href="<?php echo base_url(); ?>Main/register_as.html" role="button">Register Now!</a>
 
 				<!--<div class="footer">
 					<img class="logo" src="resources/images/tualogo.png" width="20%" height="20%">

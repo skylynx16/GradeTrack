@@ -61,10 +61,10 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8 animated fadeIn">
 			<center>
-			<?php echo '<a class="btnGoBack hvr-backward" href="'.base_url().'main/student_page.html">
+			<?php echo '<a class="btnGoBack hvr-backward" href="'.base_url().'Main/student_page.html">
 						<i class="fas fa-arrow-circle-left" style="margin-right: 5px;"></i>Go Back</a>'; ?>
 
-			<?php echo '<a class="btnPrint hvr-grow-shadow" href="'.base_url().'main/student_PrintGradesviaPDF/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'">
+			<?php echo '<a class="btnPrint hvr-grow-shadow" href="'.base_url().'Main/student_PrintGradesviaPDF/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'">
 						<i class="fas fa-print" style="margin-right: 5px;"></i>Print</a>'; ?>
 			</center>
 

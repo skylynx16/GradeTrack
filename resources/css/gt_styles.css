@@ -4,8 +4,6 @@ FONT
 	font-family: 'Century Gothic', Arial;
 **/
 
-
-
 body
 {
 	padding-top:7rem;
@@ -584,6 +582,15 @@ a:hover {
 #setSySem {
 	text-align: center;
 }
+
+.datetimestyle
+{
+	font-size: 1.3rem;
+	text-align: right;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	margin-top: 2rem;
+}
 /************** END OF ADMIN PAGE ************/
 
 /***********************************************
@@ -644,4 +651,11 @@ a:hover {
     opacity:1;
     filter:"alpha(opacity=100)";
     -ms-filter:"alpha(opacity=100)";
+}
+
+.datetimestyle2
+{
+	color: white;
+	font-size: 1rem;
+	font-family: 'Raleway', sans-serif;
 }

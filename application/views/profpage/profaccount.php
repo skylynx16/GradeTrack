@@ -12,7 +12,7 @@
                     <div class="usernameAccount">
                         <b>Name:</b> <?php echo $this->session->userdata('FName').' '.$this->session->userdata('MName').' '.$this->session->userdata('LName') ?>
                         <p style="font-size: 1.5rem";><b>ID Code:</b> <?php echo $this->session->userdata('IDCode') ?></p>
-                        <a href="<?php echo base_url(); ?>main/changePassword.html" style="font-size: 1.3rem";>Change Password</a>
+                        <a href="<?php echo base_url(); ?>Main/changePassword.html" style="font-size: 1.3rem";>Change Password</a>
                     </div>
                 </div>
             <div class="col-md-2"></div>

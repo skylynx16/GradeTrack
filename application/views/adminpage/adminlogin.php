@@ -18,7 +18,7 @@
 <!--END -------------------------------- Backup Error ----------------------------------------------------------- -->
 
 			<?php $fattr = array('class' => 'form-signin');
-					echo form_open(site_url().'admin/login/', $fattr); ?>
+					echo form_open(site_url().'Admin/login/', $fattr); ?>
 				<div class="form-group">
 					<?php echo form_input(array(
 							'name'=>'username', 

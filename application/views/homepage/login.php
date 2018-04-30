@@ -14,7 +14,7 @@
 <!--END -------------------------------- Backup Error ----------------------------------------------------------- -->
 
 			<?php $fattr = array('class' => 'form-signin');
-					echo form_open(site_url().'main/login/', $fattr); ?>
+					echo form_open(site_url().'Main/login/', $fattr); ?>
 				<div class="form-group">
 					<?php echo form_input(array(
 							'name'=>'username', 
@@ -38,7 +38,7 @@
 						<?php echo form_submit(array('value'=>'Sign In', 'class'=>'btn btn-lg btn-primary btn-block')); ?>
 						<?php echo form_close(); ?>
 				<center>
-						<p>Click <a href="<?php echo site_url();?>main/forgot_password">here</a> if you forgot your password.</p>
+						<p>Click <a href="<?php echo site_url();?>Main/forgot_password">here</a> if you forgot your password.</p>
 				</center>				
 	</div> <!--container-->
 </div><!--col-md-4-->

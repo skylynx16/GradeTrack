@@ -5,7 +5,7 @@
 				Users' Table
 			</p>
 			<div class="search-container animated bounceInLeft">
-				<form action="<?php echo base_url(); ?>admin/searchuserdetails.html" method="POST">
+				<form action="<?php echo base_url(); ?>Admin/searchuserdetails.html" method="POST">
 				Search by:
 					<input type="text" placeholder="First Name" name="FName" style="width:20%;">
 					<input type="text" placeholder="Middle Name" name="MName" style="width:20%;">
@@ -20,10 +20,10 @@
 		</div>
 		<div class="col-md-2">
 			<p style="text-align:center; vertical-align:middle;" class="animated bounceInRight">
-			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'admin/adminbody.html">
+			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'Admin/adminbody.html">
 						<i class="fas fa-arrow-circle-left" style="margin-right: 5px;"></i>Go Back</a>'; ?></p>
 			<p style="text-align:center; vertical-align:middle;" class="animated bounceInRight">
-			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'admin/users.html">
+			<?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'Admin/users.html">
 						Reset Table</a>'; ?></p>
 		</div>
 	</div>

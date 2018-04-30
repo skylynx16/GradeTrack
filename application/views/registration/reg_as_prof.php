@@ -19,7 +19,7 @@
 <div class="animated fadeIn">
 <?php 
    $attributes = array('method' => 'POST', 'role' => 'form', 'id' => 'addstudent' );
-   echo form_open_multipart('/main/addprofessor', $attributes);
+   echo form_open_multipart('/Main/addprofessor', $attributes);
 
 ?>
 
@@ -168,7 +168,7 @@
 		<div class="form-check">
 			<label class="form-check-label" for="invalidCheck">
 			<input class="form-check-input" type="checkbox" name="TermsOfUse" id="invalidCheck" required>
-			I agree to the <a href="<?php echo base_url(); ?>main/termsandconditions.html" target="_blank">terms and conditions</a> of this website.
+			I agree to the <a href="<?php echo base_url(); ?>Main/termsandconditions.html" target="_blank">terms and conditions</a> of this website.
 			</label>
 		</div>
 	</div>
@@ -208,7 +208,7 @@
     $("#iconLoader").show();
 
     jQuery.ajax({
-      url: "../main/checkProfUserName",
+      url: "../Main/checkProfUserName",
       data:'ProfUsername='+$("#ProfUsername").val(),
       type: "POST",
       success:function(data){
@@ -238,7 +238,7 @@
     $("#iconLoader1").show();
 
     jQuery.ajax({
-      url: "../main/checkProfEmail",
+      url: "../Main/checkProfEmail",
       data: 'ProfEmail='+$("#ProfEmail").val(),
       type: "POST",
       success:function(data){
@@ -268,7 +268,7 @@
     $("#iconLoader2").show();
 
     jQuery.ajax({
-      url: "../main/checkFCode",
+      url: "../Main/checkFCode",
       data: 'FCode='+$("#FCode").val(),
       type: "POST",
       success:function(data){
@@ -298,7 +298,7 @@
     $("#iconLoader3").show();
 
     jQuery.ajax({
-      url: "../main/checkProfFName",
+      url: "../Main/checkProfFName",
       data: 'FCode='+$("#FCode").val()+'&ProfFName='+$("#ProfFName").val(),
       type: "POST",
       success:function(data){
@@ -328,7 +328,7 @@
     $("#iconLoader4").show();
 
     jQuery.ajax({
-      url: "../main/checkProfMName",
+      url: "../Main/checkProfMName",
       data: 'FCode='+$("#FCode").val()+'&ProfMName='+$("#ProfMName").val(),
       type: "POST",
       success:function(data){
@@ -358,7 +358,7 @@
     $("#iconLoader5").show();
 
     jQuery.ajax({
-      url: "../main/checkProfLName",
+      url: "../Main/checkProfLName",
       data: 'FCode='+$("#FCode").val()+'&ProfLName='+$("#ProfLName").val(),
       type: "POST",
       success:function(data){
@@ -388,7 +388,7 @@
     $("#iconLoader6").show();
 
     jQuery.ajax({
-      url: "../main/checkProfBDate",
+      url: "../Main/checkProfBDate",
       data: 'FCode='+$("#FCode").val()+'&ProfBDate='+$("#ProfBDate").val(),
       type: "POST",
       success:function(data){
@@ -418,7 +418,7 @@
     $("#iconLoader7").show();
 
     jQuery.ajax({
-      url: "../main/checkProfCityAddr",
+      url: "../Main/checkProfCityAddr",
       data: 'FCode='+$("#FCode").val()+'&ProfCityAddr='+$("#ProfCityAddr").val(),
       type: "POST",
       success:function(data){

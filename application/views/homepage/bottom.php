@@ -3,9 +3,9 @@
         <center>
             <div class="footer">
                 <p style="font-size: 1rem;">
-                <img class="tualogo" src="resources/images/tualogo.png" width="5%" height="5%">
+                <img class="tualogo" src="<?php echo base_url(); ?>resources/images/tualogo.png" width="5%" height="5%">
                 A project for the College of Engineering and Information Sciences of Trinity University of Asia
-                <img class="ceislogo" src="resources/images/ceislogo.png" width="5%" height="5%">
+                <img class="ceislogo" src="<?php echo base_url(); ?>resources/images/ceislogo.png" width="5%" height="5%">
                 </p>
             </div>
         </center>
