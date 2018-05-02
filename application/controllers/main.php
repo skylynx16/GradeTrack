@@ -28,18 +28,26 @@ class Main extends MY_Controller {
 			$fieldNameLike = null, $like = null, 
 			$whereSpecial = null, $groupBy = null );
 
-		$dateToday = date('Y-m-d');
+		$datetimeToday = date('Y-m-d H:i:s');
+
 
 		if($getDateofDeadline[0]->manualOverride == 0)
 		{
-			if(strtotime($getDateofDeadline[0]->deadlineDate) < strtotime($dateToday) && !empty(@$getDateofDeadline[0]->deadlineDate))
+			if(strtotime($getDateofDeadline[0]->deadlineDateTime) < strtotime($datetimeToday) && !empty(@$getDateofDeadline[0]->deadlineDateTime))
 			{
-				//lock system for porfessors
+				//lock system for professors
 				$tblusersUpdate = array(
 					'deadlineTrigger' => 1
 				);
 
 				$recordUpdated = $this->_updateRecords($tableName = 'tblusers', $fieldName = array('UserTypeID'), $where = array(1), $tblusersUpdate);
+
+				//Update tbldeadlines to see that prof accounts are disabled
+				$tblusersUpdate2 = array(
+					'ProfAccountsDisabled' => 1
+				);
+
+				$recordUpdated2 = $this->_updateRecords($tableName = 'tbldeadlines', $fieldName = array('ID'), $where = array($getDateofDeadline[0]->ID), $tblusersUpdate2);
 			}
 		}
 
@@ -1605,12 +1613,54 @@ class Main extends MY_Controller {
 			$audit_trail = array(
 				'Username' => $this->session->userdata('Username'),
 				'UserType' => $this->session->userdata('UserTypeID'),
-				'ActionDone' => 'Updated Midterm Grades for '.$this->uri->segment(3).' Section: '.$clean_sectcode.' SY: '.$SY.' Sem: '.$Sem.'.',
+				'ActionDone' => 'Updated Midterm Grades for '.$clean_name.' Section: '.$clean_sectcode.' SY: '.$SY.' Sem: '.$Sem.'.',
 				'DateTimeActionMade' => date('Y-m-d H:i:s'),
 				'ip_address' => $this->input->ip_address()
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+
+		    //Audit Trail Prof Encode
+		    $getData1 = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblfacultyprofile'), 
+				$fieldName = array('FCode'),
+				$where = array($this->session->userdata('IDCode')),
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		    $getData2 = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblAuditTrailForProfEncode_'.$SY.'_'.$Sem), 
+				$fieldName = array('SubjCode_ProfName_Section'),
+				$where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode),
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		    if(!empty($getData2))
+		    {
+		    	//update existing record
+		    	$audit_trail2 = null;
+				$audit_trail2 = array(
+					'MidtermGradeEncoded' => 1
+				);
+				//Audit Trail
+				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode), $audit_trail2);
+		    }
+		    else
+		    {
+		    	//insert new audit trail
+				$audit_trail3 = null;
+				$audit_trail3 = array(
+					'SubjCode_ProfName_Section' => $clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode,
+					'MidtermGradeEncoded' => 1,
+					'PrefinalGradeEncoded' => 0,
+					'FinalGradeEncoded' => 0
+				);
+				//Audit Trail
+			    $this->_insertRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $audit_trail3);
+		    }
+
 		    //send sms
 		    $this->send_sms2();
 	  	}
@@ -1667,6 +1717,48 @@ class Main extends MY_Controller {
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+
+		    //Audit Trail Prof Encode
+		    $getData1 = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblfacultyprofile'), 
+				$fieldName = array('FCode'),
+				$where = array($this->session->userdata('IDCode')),
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		    $getData2 = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblAuditTrailForProfEncode_'.$SY.'_'.$Sem), 
+				$fieldName = array('SubjCode_ProfName_Section'),
+				$where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode),
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		    if(!empty($getData2))
+		    {
+		    	//update existing record
+		    	$audit_trail2 = null;
+				$audit_trail2 = array(
+					'PrefinalGradeEncoded' => 1
+				);
+				//Audit Trail
+				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode), $audit_trail2);
+		    }
+		    else
+		    {
+		    	//insert new audit trail
+				$audit_trail3 = null;
+				$audit_trail3 = array(
+					'SubjCode_ProfName_Section' => $clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode,
+					'MidtermGradeEncoded' => 0,
+					'PrefinalGradeEncoded' => 1,
+					'FinalGradeEncoded' => 0
+				);
+				//Audit Trail
+			    $this->_insertRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $audit_trail3);
+		    }
+
 		    //send sms
 		    $this->send_sms2();
 	  	}
@@ -1723,6 +1815,48 @@ class Main extends MY_Controller {
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+
+		    //Audit Trail Prof Encode
+		    $getData1 = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblfacultyprofile'), 
+				$fieldName = array('FCode'),
+				$where = array($this->session->userdata('IDCode')),
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		    $getData2 = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblAuditTrailForProfEncode_'.$SY.'_'.$Sem), 
+				$fieldName = array('SubjCode_ProfName_Section'),
+				$where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode),
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		    if(!empty($getData2))
+		    {
+		    	//update existing record
+		    	$audit_trail2 = null;
+				$audit_trail2 = array(
+					'FinalGradeEncoded' => 1
+				);
+				//Audit Trail
+				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode), $audit_trail2);
+		    }
+		    else
+		    {
+		    	//insert new audit trail
+				$audit_trail3 = null;
+				$audit_trail3 = array(
+					'SubjCode_ProfName_Section' => $clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode,
+					'MidtermGradeEncoded' => 0,
+					'PrefinalGradeEncoded' => 0,
+					'FinalGradeEncoded' => 1
+				);
+				//Audit Trail
+			    $this->_insertRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $audit_trail3);
+		    }
+
 		    //send sms
 		    $this->send_sms2();
 	  	}
@@ -1787,6 +1921,50 @@ class Main extends MY_Controller {
 			);
 			//Audit Trail
 		    $this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
+
+		    //Audit Trail Prof Encode
+		    $getData1 = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblfacultyprofile'), 
+				$fieldName = array('FCode'),
+				$where = array($this->session->userdata('IDCode')),
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		    $getData2 = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblAuditTrailForProfEncode_'.$SY.'_'.$Sem), 
+				$fieldName = array('SubjCode_ProfName_Section'),
+				$where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode),
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+		    if(!empty($getData2))
+		    {
+		    	//update existing record
+		    	$audit_trail2 = null;
+				$audit_trail2 = array(
+					'MidtermGradeEncoded' => 1,
+					'PrefinalGradeEncoded' => 1,
+					'FinalGradeEncoded' => 1
+				);
+				//Audit Trail
+				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode), $audit_trail2);
+		    }
+		    else
+		    {
+		    	//insert new audit trail
+				$audit_trail3 = null;
+				$audit_trail3 = array(
+					'SubjCode_ProfName_Section' => $clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode,
+					'MidtermGradeEncoded' => 1,
+					'PrefinalGradeEncoded' => 1,
+					'FinalGradeEncoded' => 1
+				);
+				//Audit Trail
+			    $this->_insertRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $audit_trail3);
+		    }
+
 		    //send sms
 		    $this->send_sms2();
 	  	}

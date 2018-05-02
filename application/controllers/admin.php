@@ -264,7 +264,7 @@ class Admin extends MY_Controller {
 				$whereSpecial = null, $groupBy = null );
 
 			header("Access-Control-Allow-Origin: *");
-			$title['title'] = "Audit Trail";
+			$title['title'] = "General Audit Trail";
 
 			$data['tblaudittrail'] = $getWholeTable;
 
@@ -276,8 +276,7 @@ class Admin extends MY_Controller {
 		else
 		{
 			redirect(base_url().'Admin');
-		}	
-		
+		}
 	}
 	/************************************END SHOW AUDIT TRAIL ******************************************** */
 
@@ -360,12 +359,22 @@ class Admin extends MY_Controller {
 			//Audit Trail
 			$this->_insertRecords($tableName = 'tblaudittrail', $audit_trail);
 
-			if(@$getData[0]->Sem != @$getData[0]->prevSem)
+			$getData1 = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblsetsysemgp'), 
+				$fieldName = null,
+				$where = null,
+				$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+			if($getData1[0]->Sem != $getData1[0]->prevSem)
 			{
 				$tblusersUpdate = array(
 					'parentNotif' => 0,
 					'parentNotifIsSet' => 0
 				);
+
+				$this->Gt_model->createTblForProfAuditTrail($getData1[0]->Sem,$getData1[0]->SY);
 
 				$this->_updateRecords($tableName = 'tblusers', $fieldName = array('parentNotif'), $where = null, $tblusersUpdate);
 			}
@@ -482,23 +491,30 @@ class Admin extends MY_Controller {
 	/************************************SETTING DEADLINE******************************************** */
 	public function showdeadline()
 	{
-		$getData = $this->_getRecordsData($data = array('*'), 
-				$tables = array('tbldeadlines'), 
-				$fieldName = null,
-				$where = null,
-				$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = array('10','0'), 
-				$fieldNameLike = null, $like = null, 
-				$whereSpecial = null, $groupBy = null );
+		if($this->session->userdata('Username') != '')
+		{
+			$getData = $this->_getRecordsData($data = array('*'), 
+					$tables = array('tbldeadlines'), 
+					$fieldName = null,
+					$where = null,
+					$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = array('10','0'), 
+					$fieldNameLike = null, $like = null, 
+					$whereSpecial = null, $groupBy = null );
 
-		header("Access-Control-Allow-Origin: *");
-		$title['title'] = "Set Deadline and Toggle System Accessibility";
+			header("Access-Control-Allow-Origin: *");
+			$title['title'] = "Set Deadline and Toggle System Accessibility";
 
-		$data['wholetable'] = $getData;
+			$data['wholetable'] = $getData;
 
-		$this->load->view('header', $title);
-		$this->load->view('adminpage/adminnavbar');
-		$this->load->view('adminpage/SetDeadlineEnableDisableSys', $data);
-		$this->load->view('footer');
+			$this->load->view('header', $title);
+			$this->load->view('adminpage/adminnavbar');
+			$this->load->view('adminpage/SetDeadlineEnableDisableSys', $data);
+			$this->load->view('footer');
+		}
+		else
+		{
+			redirect(base_url().'Admin');
+		}
 	}
 
 	public function setdeadline()
@@ -514,7 +530,7 @@ class Admin extends MY_Controller {
 		//insert records into database
 		$data = null;
 		$data = array(
-			'deadlineDate' => $this->input->post('deadlineDate'),
+			'deadlineDateTime' => $this->input->post('deadlineDate').' '.$this->input->post('deadlineTime'),
 			'Sem' => $getData[0]->Sem,
 			'SY' => $getData[0]->SY,
 			'datetimeSet' => date('Y-m-d H:i:s')
@@ -562,7 +578,8 @@ class Admin extends MY_Controller {
 				$whereSpecial = null, $groupBy = null );
 
 		$tbldeadlinesUpdate = array(
-				'manualOverride' => 1
+				'manualOverride' => 1,
+				'ProfAccountsDisabled' => 0
 			);
 
 		$recordUpdated2 = $this->_updateRecords($tableName = 'tbldeadlines', $fieldName = array('ID'), $where = array($getData[0]->ID), $tbldeadlinesUpdate);
@@ -593,10 +610,18 @@ class Admin extends MY_Controller {
 				$whereSpecial = null, $groupBy = null );
 
 		$tbldeadlinesUpdate = array(
-				'manualOverride' => 0
+				'manualOverride' => 0,
+				'ProfAccountsDisabled' => 1
 			);
 
 		$recordUpdated = $this->_updateRecords($tableName = 'tbldeadlines', $fieldName = array('ID'), $where = array($getData[0]->ID), $tbldeadlinesUpdate);
+
+		//lock system for professors
+		$tblusersUpdate = array(
+			'deadlineTrigger' => 1
+		);
+
+		$recordUpdated = $this->_updateRecords($tableName = 'tblusers', $fieldName = array('UserTypeID'), $where = array(1), $tblusersUpdate);
 
 		//Audit Trails
 		$audit_trail = null;
@@ -613,4 +638,78 @@ class Admin extends MY_Controller {
 		$this->showdeadline();
 	}
 	/******************************END CUSTOM DISABLE/ENABLE OF PROF ACCOUNTS(FOR SPECIAL CASES)************************************* */
+
+	/******************************AUDIT TRAIL FOR PROFESSOR ENCODING************************************* */
+	public function profencodeaudittrail()
+	{
+		if($this->session->userdata('Username') != '')
+		{
+			$getSYsem = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblsetsysemgp'), 
+				$fieldName = null,
+				$where = null,
+				$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null );
+
+			$getWholeTable = $this->_getRecordsData($data = array('*'), 
+				$tables = array('tblAuditTrailForProfEncode_'.$getSYsem[0]->SY.'_'.$getSYsem[0]->Sem), 
+				$fieldName = null,
+				$where = null,
+				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = array('10','0'), 
+				$fieldNameLike = null, $like = null, 
+				$whereSpecial = null, $groupBy = null);
+
+			header("Access-Control-Allow-Origin: *");
+			$title['title'] = "Professor Encoding Audit Trail";
+
+			$data['tblaudittrail'] = $getWholeTable;
+			$data['SY'] = $getSYsem[0]->SY;
+			$data['Sem'] = $getSYsem[0]->Sem;
+
+			$this->load->view('header', $title);
+			$this->load->view('adminpage/adminnavbar');
+			$this->load->view('adminpage/AuditTrailProfEncode', $data);
+			$this->load->view('footer');
+		}
+		else
+		{
+			redirect(base_url().'Admin');
+		}
+	}
+
+	public function searchProfEncodeAuditTrail()
+	{
+		$getSYsem = $this->_getRecordsData($data = array('*'), 
+			$tables = array('tblsetsysemgp'), 
+			$fieldName = null,
+			$where = null,
+			$join = null, $joinType = null, $sortBy = array('ID'), $sortOrder = array('DESC'), $limit = null, 
+			$fieldNameLike = null, $like = null, 
+			$whereSpecial = null, $groupBy = null );
+
+		$clean = $this->security->xss_clean($this->input->post(NULL, TRUE));
+
+		$getSearch = $this->_getRecordsData($data = array('*'), 
+			$tables = array('tblAuditTrailForProfEncode_'.$getSYsem[0]->SY.'_'.$getSYsem[0]->Sem),
+			$fieldName = null,
+			$where = null,
+			$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
+			$fieldNameLike = array('SubjCode_ProfName_Section'),
+			$like = array($clean['SearchKey']), 
+			$whereSpecial = null, $groupBy = null );
+
+		header("Access-Control-Allow-Origin: *");
+		$title['title'] = "Professor Encoding Audit Trail";
+
+		$data['tblaudittrail'] = $getSearch;
+		$data['SY'] = $getSYsem[0]->SY;
+		$data['Sem'] = $getSYsem[0]->Sem;
+
+		$this->load->view('header', $title);
+		$this->load->view('adminpage/adminnavbar');
+		$this->load->view('adminpage/AuditTrailProfEncode', $data);
+		$this->load->view('footer');
+	}
+	/******************************END AUDIT TRAIL FOR PROFESSOR ENCODING************************************* */
 }

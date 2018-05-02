@@ -287,4 +287,19 @@ class Gt_model extends CI_Model
 	}
 	//UPDATE TABLE FOR ENROLLMENT IN BATCH
     //------------------------------------------------------------------------
+    //------------------------------------------------------------------------
+	//CREATE TABLE FOR PROF AUDIT TRAIL
+	public function createTblForProfAuditTrail($Sem,$SY)
+	{
+		$this->db->query(
+		"CREATE TABLE IF NOT EXISTS tblAuditTrailForProfEncode_".$SY."_".$Sem." (
+		    SubjCode_ProfName_Section varchar(255) Unique,
+		    MidtermGradeEncoded int default 0,
+		    PrefinalGradeEncoded int default 0,
+		    FinalGradeEncoded int default 0		    
+		);"
+		);
+	}
+	//CREATE TABLE FOR PROF AUDIT TRAIL
+    //------------------------------------------------------------------------
 }

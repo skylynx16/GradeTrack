@@ -29,7 +29,19 @@
             <div class="col-md-2 sm-2"></div>
             <div class="col-md-8 sm-8">
                 <div class="admin-subtitle">    
-                    <a href="<?php echo base_url(); ?>Admin/audittrail.html">Audit Trail</a>
+                    <a href="<?php echo base_url(); ?>Admin/audittrail.html">General Audit Trail</a>
+                </div>
+            </div>
+            <div class="col-md-2 sm-2"></div>
+        </div>
+
+<!-- ---------- -->  <div class="col-md-12 lg-12 sm-12"><hr class="admin-hr"></div> <!-- ------- -->
+
+        <div class="row">
+            <div class="col-md-2 sm-2"></div>
+            <div class="col-md-8 sm-8">
+                <div class="admin-subtitle">    
+                    <a href="<?php echo base_url(); ?>Admin/profencodeaudittrail.html">Professor Encoding Audit Trail</a>
                 </div>
             </div>
             <div class="col-md-2 sm-2"></div>

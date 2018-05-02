@@ -16,26 +16,20 @@
     <form id="setsysemgp" action="<?php echo base_url(); ?>Admin/setdeadline" method="POST" class="animated bounceInRight">
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
-                <b>Set Deadline of Encoding of Final Grades</b><br>
-                <input style="width: 50%;border: solid gray 1px;" type="date" id="deadlineDate" name="deadlineDate" required>
-                <?php echo "<div class='message' style= 'color:red; font-size:0.8rem; font-family: Arial, Helvetica, sans-serif; text-align:center; margin-top:0.5rem;'>"; ?>
-                <?php echo "</div>";?>
+                <b>Set Deadline of Encoding of Final Grades</b><br><br>
+                Date: <input style="width: 30%;border: solid gray 1px;" type="date" id="deadlineDate" name="deadlineDate" required>&nbsp;
+                Time: <input style="width: 30%;border: solid gray 1px;" type="time" id="deadlineTime" name="deadlineTime" required><br>
+                <button type="submit" class="btn btn-default btn-info" style="width: 20%; margin-top: 1rem;">Set</button>
             </div>
         </div>
-            
-        <div class="col-md-1">
-            <div class="form-group">
-                <button type="submit" class="btn btn-default btn-info" style="width: 100%; margin-top: 1rem;">Set</button>
-            </div>
-        </div>
-        <div class="col-md-1"></div>
+
         <div class="col-md-5">
             <?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'Admin/enableprofaccounts">
                         Manually Unlock Professor Accounts</a>'; ?><br><br>
             <?php echo '<a class="btnGoBack2 hvr-backward" style="margin-right:5px;" href="'.base_url().'Admin/disableprofaccounts">
-                        Lock Professor Accounts</a>'; ?>
+                        Manually Lock Professor Accounts</a>'; ?>
         </div>
     </div>
     </form>  
@@ -48,7 +42,7 @@
 
                 <table class="table table-bordered animated flipInX" id="setSySem">
                         <tr id="user_tbl_head" class="setSySem">
-                            <td id="user_tbl_data">Deadline Date</td>
+                            <td id="user_tbl_data">Deadline Date and Time</td>
                             <td id="user_tbl_data">Semester</td>
                             <td id="user_tbl_data">School Year</td>
                             <td id="user_tbl_data">Date and Time Set</td>
@@ -57,7 +51,7 @@
                         </tr>
                     <?php if(isset($wholetable)) : foreach($wholetable as $row) : ?>
                         <tr id="user_tbl_content" class="setSySem">
-                            <td id="user_tbl_data"><?php echo $row->deadlineDate; ?></td>
+                            <td id="user_tbl_data"><?php echo $row->deadlineDateTime; ?></td>
                             <td id="user_tbl_data"><?php echo $row->Sem; ?></td>
                             <td id="user_tbl_data"><?php echo $row->SY; ?></td>
                             <td id="user_tbl_data"><?php echo $row->datetimeSet; ?></td>
