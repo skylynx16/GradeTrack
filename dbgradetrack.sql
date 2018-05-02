@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2018 at 05:52 AM
+-- Generation Time: May 02, 2018 at 09:57 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.34
 
@@ -65,6 +65,13 @@ CREATE TABLE `tbldeadlines` (
   `ProfAccountsDisabled` int(1) NOT NULL DEFAULT '0',
   `manualOverride` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbldeadlines`
+--
+
+INSERT INTO `tbldeadlines` (`ID`, `deadlineDateTime`, `Sem`, `SY`, `datetimeSet`, `ProfAccountsDisabled`, `manualOverride`) VALUES
+(1, NULL, '', 0, '2018-05-02 19:56:41', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -485,7 +492,7 @@ ALTER TABLE `tblaudittrail`
 -- AUTO_INCREMENT for table `tbldeadlines`
 --
 ALTER TABLE `tbldeadlines`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblenrollment`
