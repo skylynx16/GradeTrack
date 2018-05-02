@@ -423,7 +423,7 @@ class Admin extends MY_Controller {
 		$numOfLoggedIn = count($getNumberOfOnlineUsers);
 
 		header("Access-Control-Allow-Origin: *");
-		$title['title'] = "Admin";
+		$title['title'] = "Users";
 
 		$data['tblusers'] = $getSearch;
 		$data['noOfActiveUsers'] = $numOfActive;
