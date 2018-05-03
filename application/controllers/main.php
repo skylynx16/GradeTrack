@@ -1632,7 +1632,7 @@ class Main extends MY_Controller {
 		    $getData2 = $this->_getRecordsData($data = array('*'), 
 				$tables = array('tblAuditTrailForProfEncode_'.$SY.'_'.$Sem), 
 				$fieldName = array('SubjCode_ProfName_Section'),
-				$where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode),
+				$where = array($clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode),
 				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
 				$fieldNameLike = null, $like = null, 
 				$whereSpecial = null, $groupBy = null );
@@ -1645,7 +1645,7 @@ class Main extends MY_Controller {
 					'MidtermGradeEncoded' => 1
 				);
 				//Audit Trail
-				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode), $audit_trail2);
+				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode), $audit_trail2);
 		    }
 		    else
 		    {
@@ -1730,7 +1730,7 @@ class Main extends MY_Controller {
 		    $getData2 = $this->_getRecordsData($data = array('*'), 
 				$tables = array('tblAuditTrailForProfEncode_'.$SY.'_'.$Sem), 
 				$fieldName = array('SubjCode_ProfName_Section'),
-				$where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode),
+				$where = array($clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode),
 				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
 				$fieldNameLike = null, $like = null, 
 				$whereSpecial = null, $groupBy = null );
@@ -1743,7 +1743,7 @@ class Main extends MY_Controller {
 					'PrefinalGradeEncoded' => 1
 				);
 				//Audit Trail
-				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode), $audit_trail2);
+				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode), $audit_trail2);
 		    }
 		    else
 		    {
@@ -1828,7 +1828,7 @@ class Main extends MY_Controller {
 		    $getData2 = $this->_getRecordsData($data = array('*'), 
 				$tables = array('tblAuditTrailForProfEncode_'.$SY.'_'.$Sem), 
 				$fieldName = array('SubjCode_ProfName_Section'),
-				$where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode),
+				$where = array($clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode),
 				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
 				$fieldNameLike = null, $like = null, 
 				$whereSpecial = null, $groupBy = null );
@@ -1841,7 +1841,7 @@ class Main extends MY_Controller {
 					'FinalGradeEncoded' => 1
 				);
 				//Audit Trail
-				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode), $audit_trail2);
+				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode), $audit_trail2);
 		    }
 		    else
 		    {
@@ -1934,7 +1934,7 @@ class Main extends MY_Controller {
 		    $getData2 = $this->_getRecordsData($data = array('*'), 
 				$tables = array('tblAuditTrailForProfEncode_'.$SY.'_'.$Sem), 
 				$fieldName = array('SubjCode_ProfName_Section'),
-				$where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode),
+				$where = array($clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode),
 				$join = null, $joinType = null, $sortBy = null, $sortOrder = null, $limit = null, 
 				$fieldNameLike = null, $like = null, 
 				$whereSpecial = null, $groupBy = null );
@@ -1949,7 +1949,7 @@ class Main extends MY_Controller {
 					'FinalGradeEncoded' => 1
 				);
 				//Audit Trail
-				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.'_'.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.'_'.$clean_sectcode), $audit_trail2);
+				$this->_updateRecords($tableName = 'tblAuditTrailForProfEncode_'.$SY.'_'.$Sem, $fieldName = array('SubjCode_ProfName_Section'), $where = array($clean_name.' | '.$getData1[0]->LName.', '.$getData1[0]->FName.' '.$getData1[0]->MName.' | '.$clean_sectcode), $audit_trail2);
 		    }
 		    else
 		    {

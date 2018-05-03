@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 02, 2018 at 09:57 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 5.6.34
+-- Host: localhost
+-- Generation Time: May 03, 2018 at 05:27 PM
+-- Server version: 10.2.12-MariaDB
+-- PHP Version: 7.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dbgradetrack`
+-- Database: `id5604476_dbgradetrack`
 --
 
 -- --------------------------------------------------------
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `ci_sessions` (
   `id` varchar(128) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
-  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -61,9 +61,9 @@ CREATE TABLE `tbldeadlines` (
   `deadlineDateTime` datetime DEFAULT NULL,
   `Sem` char(1) NOT NULL,
   `SY` int(11) NOT NULL,
-  `datetimeSet` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ProfAccountsDisabled` int(1) NOT NULL DEFAULT '0',
-  `manualOverride` int(1) NOT NULL DEFAULT '0'
+  `datetimeSet` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ProfAccountsDisabled` int(1) NOT NULL DEFAULT 0,
+  `manualOverride` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -238,10 +238,10 @@ CREATE TABLE `tblstudentguardian` (
 --
 
 INSERT INTO `tblstudentguardian` (`StudNo`, `Guardian`, `Mobile`) VALUES
-('2000300001', 'Lourdes F. Robles', '09213740479'),
 ('2000300002', 'Jessie Perez', '09991234567'),
 ('2001300414', 'Linda Flores', '09991234567'),
 ('2003300001', 'Jose Mercado', '09991234567'),
+('2013300322', 'Lourdes F. Robles', '09211234567'),
 ('2014300323', 'Larry Tolentino', '09991234567'),
 ('2014301168', 'Lily Juliano', '09987654321');
 
@@ -273,7 +273,7 @@ INSERT INTO `tblstudentpersonaldata` (`StudNo`, `LName`, `FName`, `MName`, `BDat
 ('2000300001', 'Mercado', 'Jose', 'Velasco', '1997-03-15', '09991234567', 'Quezon City', '3025A', '3025A 4-4ITMW01', '4', 'resources/images/profilepic/userprofilepicmale.png'),
 ('2000300002', 'Perez', 'Kate', 'Sanchez', '1995-04-09', '09991234567', 'Antipolo City', '3025B', '3025B 4-4ITSE01', '4', 'resources/images/profilepic/userprofilepicfemale.png'),
 ('2001300414', 'Flores', 'Michelle', 'Vince-Cruz', '1996-03-01', '09991234567', 'Quezon City', '3025C', '3025C 4-4ITMA01', '4', 'resources/images/profilepic/userprofilepicfemale.png'),
-('2013300322', 'Robles', 'Andreu Vinzent', 'Florendo', '1996-03-16', '09166574037', 'Mandaluyong City', '3025B', '3025B 4-4ITSE01', '4', 'resources/images/profilepic/userprofilepicmale.png'),
+('2013300322', 'Robles', 'Andreu Vinzent', 'Florendo', '1996-03-16', '09161234567', 'Mandaluyong City', '3025B', '3025B 4-4ITSE01', '4', 'resources/images/profilepic/userprofilepicmale.png'),
 ('2014300323', 'Tolentino', 'Mike', 'Reyes', '1994-11-21', '09991234567', 'Makati City', '3025C', '3025C 4-4ITMA01', '4', 'resources/images/profilepic/userprofilepicmale.png'),
 ('2014301168', 'Juliano', 'Bernadine', 'Boncay', '1996-06-19', '09061633137', 'Quezon City', '3025A', '3025A 4-4ITMW01', '4', 'resources/images/profilepic/userprofilepicfemale.png');
 
@@ -314,7 +314,7 @@ CREATE TABLE `tbltokens` (
   `ID` int(11) NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `UserID` int(11) DEFAULT NULL,
-  `timeStamp` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+  `timeStamp` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -350,11 +350,11 @@ CREATE TABLE `tblusers` (
   `MName` varchar(30) DEFAULT NULL,
   `isactive` int(1) DEFAULT NULL,
   `passresetreq` varchar(20) DEFAULT NULL,
-  `isloggedin` int(1) NOT NULL DEFAULT '0',
-  `parentNotif` int(1) NOT NULL DEFAULT '0',
-  `parentNotifIsSet` int(1) NOT NULL DEFAULT '0',
+  `isloggedin` int(1) NOT NULL DEFAULT 0,
+  `parentNotif` int(1) NOT NULL DEFAULT 0,
+  `parentNotifIsSet` int(1) NOT NULL DEFAULT 0,
   `profilePic` varchar(255) DEFAULT NULL,
-  `deadlineTrigger` int(1) NOT NULL DEFAULT '0'
+  `deadlineTrigger` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
